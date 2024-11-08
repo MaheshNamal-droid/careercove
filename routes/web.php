@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AdministratorUser;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -14,10 +15,21 @@ Route::get('/', function () {
     ]);
 });
 
+// admin routes
+Route::get('/administrator', function () {
+    return Inertia::render('Admin/Home');
+})->middleware(['auth', 'verified'])->name('administrator');
+Route::get('/administrator/users', function () {
+    return Inertia::render('Admin/Users');
+})->middleware(['auth', 'verified'])->name('administrator');
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
-
+Route::middleware('auth')->group(function () {
+    Route::get('/getUsers', [AdministratorUser::class, 'getUsers']);
+});
+// profile routes
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
