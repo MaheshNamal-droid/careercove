@@ -6,9 +6,16 @@ import React, { useState } from 'react';
 export default function createVacancy({ auth }) {
   // Define form state
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
+    title: '',
+    description: '',
+    requirement: '',
+    location: '',
     file: null,
+    company_name: '',
+    company_logo: null,
+    contact_phone: '',
+    contact_email:'',
+    address:'',
   });
   // Handle input changes
   const handleChange = (e) => {
@@ -19,33 +26,44 @@ export default function createVacancy({ auth }) {
     const handleFileChange = (e) => {
         setFormData({ ...formData, file: e.target.files[0] });
       };
+      const handleFileChange2 = (e) => {
+        setFormData({ ...formData, company_logo: e.target.files[0] });
+      };
 // Handle form submission
 const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Create FormData object to send form data and file
     const data = new FormData();
-    data.append('name', formData.name);
-    data.append('email', formData.email);
+    data.append('title', formData.title);
+    data.append('description', formData.description);
+    data.append('requirement', formData.requirement);
+    data.append('closing_date', formData.closing_date);
+    data.append('location', formData.location);
     data.append('file', formData.file);
-
+    data.append('company_name', formData.company_name);
+    data.append('company_logo', formData.company_logo);
+    data.append('contact_phone', formData.contact_phone);
+    data.append('contact_email', formData.contact_email);
+    data.append('address', formData.address);
+    
     try {
       const response = await fetch('/addVacancy', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
+
             'X-CSRF-TOKEN': document.head.querySelector('meta[name="csrf-token"]')?.getAttribute('content'),
         },
         body: data,
       });
 
       if (response.ok) {
-        alert('File uploaded successfully!');
+        alert('Vacancy added successfully!');
       } else {
-        alert('File upload failed.');
+        alert('Failed to add vacancy.');
       }
     } catch (error) {
-      console.error('Error uploading file:', error);
+      console.error('Error adding vacancy:', error);
     }
   };
     return (
@@ -63,11 +81,86 @@ const handleSubmit = async (e) => {
                             <h3 className="block text-gray-700 font-semibold mb-2 text-lg text-center">New Vacancy</h3>
                         </div> 
                         <div>
-                            <label className="block text-gray-700 font-semibold mb-2">Name:</label>
+                            <label className="block text-gray-700 font-semibold mb-2">Job Title:</label>
                             <input
                             type="text"
-                            name="name"
-                            value={formData.name}
+                            name="title"
+                            value={formData.title}
+                            onChange={handleChange}
+                            required
+                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
+                            />
+                        </div>
+                        <div>
+                            <label className="block text-gray-700 font-semibold mb-2">Description:</label>
+                            <input
+                            type="text"
+                            name="description"
+                            value={formData.description}
+                            onChange={handleChange}
+                            required
+                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
+                            />
+                        </div>
+                        <div>
+                            <label className="block text-gray-700 font-semibold mb-2">Requirements:</label>
+                            <input
+                            type="text"
+                            name="requirement"
+                            value={formData.requirement}
+                            onChange={handleChange}
+                            required
+                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
+                            />
+                        </div>
+                        <div>
+                            <label className="block text-gray-700 font-semibold mb-2">Location:</label>
+                            <input
+                            type="text"
+                            name="location"
+                            value={formData.location}
+                            onChange={handleChange}
+                            required
+                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
+                            />
+                        </div>
+                        <div>
+                            <label className="block text-gray-700 font-semibold mb-2">Banner:</label>
+                            <input
+                            type="file"
+                            name="file"
+                            onChange={handleFileChange}
+                            required
+                            className="w-full"
+                            />
+                        </div>
+                        <div>
+                            <label className="block text-gray-700 font-semibold mb-2">Company Name:</label>
+                            <input
+                            type="text"
+                            name="company_name"
+                            value={formData.company_name}
+                            onChange={handleChange}
+                            required
+                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
+                            />
+                        </div>
+                        <div>
+                            <label className="block text-gray-700 font-semibold mb-2">Company Logo:</label>
+                            <input
+                            type="file"
+                            name="company_logo"
+                            onChange={handleFileChange2}
+                            required
+                            className="w-full"
+                            />
+                        </div>
+                        <div>
+                            <label className="block text-gray-700 font-semibold mb-2">Phone Number:</label>
+                            <input
+                            type="text"
+                            name="contact_phone"
+                            value={formData.contact_phone}
                             onChange={handleChange}
                             required
                             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
@@ -76,21 +169,34 @@ const handleSubmit = async (e) => {
                         <div>
                             <label className="block text-gray-700 font-semibold mb-2">Email:</label>
                             <input
-                            type="email"
-                            name="email"
-                            value={formData.email}
+                            type="text"
+                            name="contact_email"
+                            value={formData.contact_email}
                             onChange={handleChange}
                             required
                             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
                             />
                         </div>
                         <div>
-                            <label className="block text-gray-700 font-semibold mb-2">File:</label>
+                            <label className="block text-gray-700 font-semibold mb-2">Address:</label>
                             <input
-                            type="file"
-                            onChange={handleFileChange}
+                            type="text"
+                            name="address"
+                            value={formData.address}
+                            onChange={handleChange}
                             required
-                            className="w-full"
+                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
+                            />
+                        </div>
+                        <div>
+                            <label className="block text-gray-700 font-semibold mb-2">Closing Date:</label>
+                            <input
+                            type="date"
+                            name="closing_date"
+                            value={formData.closing_date}
+                            onChange={handleChange}
+                            required
+                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
                             />
                         </div>
                         <button
