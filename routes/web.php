@@ -23,10 +23,15 @@ Route::get('/administrator', function () {
 Route::get('/administrator/users', function () {
     return Inertia::render('Admin/Users');
 })->middleware(['auth', 'verified'])->name('administrator');
-
+// dashboard routes
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard/initiateScroll', [JobController::class, 'initiateScroll']);
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/getUsers', [AdministratorUser::class, 'getUsers']);

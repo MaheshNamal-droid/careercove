@@ -58,4 +58,16 @@ class JobController extends Controller
             return response()->json('Unable to save data, please contact administrator !', 404); 
         }
     }
+// infinate scroll
+    public function initiateScroll(Request $request)
+    {
+        $vacancies = job_vacancy::paginate(10); // Paginate the results, 10 per page
+        return Response::json($vacancies);
+        if ($request->ajax()) {
+           // return view('users.partials.users_list', compact('users'))->render();
+           return Response::json($vacancies);
+        }
+
+        //return view('users.index', compact('users'));
+    }
 }
