@@ -52,15 +52,28 @@ export default function Dashboard({ auth }) {
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900">
-                            <center>
-                            {jobdata.map(user => {
-                                return (
-                                    <div className="bg-sky-500/100 h-10 w-10 rounded-full">
-                                    <p style={{ fontSize: 20, color: 'white' }}>{user.title}</p>
-                                    </div>
-                                );
+                                
+                                {jobdata.map(job => {
+                                    return (
+                                        <div className="flex flex-row mb-2 border-solid border-2 border-sky-500">
+                                            <div className="w-1/4">
+                                                <div class="size-16 place-content-center">
+                                                <img src={`../../files/${job.company_logo}`}  class="object-scale-down w-96"  alt="product-img"/>
+                                                </div>
+                                            </div>
+                                            <div className="w-1/4">
+                                            <p style={{ fontSize: 20, color: 'black' }}>{job.title}</p>
+                                            <p style={{ fontSize: 20, color: 'black' }}>{job.company_name}</p>
+                                            </div>
+                                            <div className="w-1/4">
+                                            <p style={{ fontSize: 20, color: 'black' }}>{job.city}</p>
+                                            </div>
+                                            <div className="w-1/4">
+                                            <p style={{ fontSize: 20, color: 'black' }}>{job.full_or_part_time}</p>
+                                            </div>
+                                        </div>
+                                    );
                                 })}
-                            </center> 
                         </div>
                     </div>
                 </div>
