@@ -30,10 +30,14 @@ export default function Dashboard({ auth }) {
           loadVacancys();
         }
       };
-    // window load
-    window.onload = function() {
+    
+    const viewVacancy = (e) => {
+        //console.log(e.target.id);
+        window.location.href = "/dashboard/"+e;
+    }
+    useEffect(() => {
         loadVacancys();
-      };
+      }, []); 
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -55,21 +59,21 @@ export default function Dashboard({ auth }) {
                                 
                                 {jobdata.map(job => {
                                     return (
-                                        <div className="flex flex-row mb-2 border-solid border-2 border-sky-500">
+                                        <div className="flex flex-row mb-2 border-solid border rounded-sm hover:bg-gray-100" onClick={() => viewVacancy(job.id)} style={{color: "#edeaea4a"}}>
                                             <div className="w-1/4">
-                                                <div class="size-16 place-content-center">
+                                                <div class="size-16 place-content-center ml-10">
                                                 <img src={`../../files/${job.company_logo}`}  class="object-scale-down w-96"  alt="product-img"/>
                                                 </div>
                                             </div>
-                                            <div className="w-1/4">
-                                            <p style={{ fontSize: 20, color: 'black' }}>{job.title}</p>
-                                            <p style={{ fontSize: 20, color: 'black' }}>{job.company_name}</p>
+                                            <div className="w-1/4 flex flex-col pt-2">
+                                            <p style={{ fontSize: 17, color: 'black' }}>{job.title}</p>
+                                            <p style={{ fontSize: 13, color: 'black' }}>{job.company_name}</p>
                                             </div>
-                                            <div className="w-1/4">
-                                            <p style={{ fontSize: 20, color: 'black' }}>{job.city}</p>
+                                            <div className="w-1/4 inline-flex items-center">
+                                            <p style={{ fontSize: 14, color: 'black' }}>{job.city}</p>
                                             </div>
-                                            <div className="w-1/4">
-                                            <p style={{ fontSize: 20, color: 'black' }}>{job.full_or_part_time}</p>
+                                            <div className="w-1/4 inline-flex items-center">
+                                            <p style={{ fontSize: 14, color: 'black' }}>{job.full_or_part_time}</p>
                                             </div>
                                         </div>
                                     );

@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\job_vacancy;
 use Auth;
 use Response;
-
+use Redirect;
+use Inertia\Inertia;
 
 class JobController extends Controller
 {
@@ -69,5 +70,16 @@ class JobController extends Controller
         }
 
         //return view('users.index', compact('users'));
+    }
+// view vacancy
+    public function getVacancy(Request $request)
+    {
+        $vacancy = job_vacancy::find($request->id);
+       // return Response::json($vacancy);
+        // return view('viewVacancy', compact('vacancy'));
+        // return Redirect::route('viewVacancy')->with( ['data' => $vacancy] );
+        return Inertia::render('Job/viewVacancy', [
+           'data' => $vacancy
+        ]);
     }
 }

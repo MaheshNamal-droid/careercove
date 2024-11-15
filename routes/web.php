@@ -28,14 +28,21 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard/initiateScroll', [JobController::class, 'initiateScroll']);
 });
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard/{id}', [JobController::class, 'getVacancy']);
+});
+Route::get('/viewVacancy', function () {
+    return Inertia::render('Job/viewVacancy');
+})->middleware(['auth', 'verified'])->name('viewVacancy');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/getUsers', [AdministratorUser::class, 'getUsers']);
 });
+
 // profile routes
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
