@@ -38,6 +38,11 @@ Route::get('/viewVacancy', function () {
     return Inertia::render('Job/viewVacancy');
 })->middleware(['auth', 'verified'])->name('viewVacancy');
 
+Route::middleware('auth')->group(function () {
+    Route::get('/applyVacancy/{id}', [JobController::class, 'applyVacancy']);
+});
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/getUsers', [AdministratorUser::class, 'getUsers']);

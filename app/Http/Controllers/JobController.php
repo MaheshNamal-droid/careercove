@@ -82,4 +82,12 @@ class JobController extends Controller
            'data' => $vacancy
         ]);
     }
+    // approve vacancy
+    public function applyVacancy(Request $request)
+    {
+        $vacancy = job_vacancy::find($request->id);
+        $vacancy->status = 1;
+        $vacancy->save();
+        return Redirect::route('viewVacancy')->with( ['data' => $vacancy] );
+    }
 }
