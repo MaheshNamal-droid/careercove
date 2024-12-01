@@ -54,6 +54,18 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+// promotion route
+Route::get('/createPromotion', function () {
+return Inertia::render('Promotion/createPromotion');
+})->middleware(['auth', 'verified'])->name('createPromotion');
+Route::middleware('auth')->group(function () {
+    Route::post('/addPromotion', [JobController::class, 'create']);
+    // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+
 // job vacancy routes
 Route::get('/createVacancy', function () {
     return Inertia::render('Job/createVacancy');
