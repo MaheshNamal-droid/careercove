@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdministratorUser;
 use App\Http\Controllers\JobController;
+use App\Http\Controllers\PromotionController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -60,7 +61,7 @@ Route::get('/createPromotion', function () {
 return Inertia::render('Promotion/createPromotion');
 })->middleware(['auth', 'verified'])->name('createPromotion');
 Route::middleware('auth')->group(function () {
-    Route::post('/addPromotion', [JobController::class, 'create']);
+    Route::post('/addPromotion', [PromotionController::class, 'create']);
     // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
