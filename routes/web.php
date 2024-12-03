@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdministratorUser;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\UserProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -72,6 +73,16 @@ Route::get('/createReview', function () {
     })->middleware(['auth', 'verified'])->name('createReview');
     Route::middleware('auth')->group(function () {
         Route::post('/addReview', [ReviewController::class, 'create']);
+        // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+        // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    });
+
+    // user_profile route
+Route::get('/createUserProfile', function () {
+    return Inertia::render('UserProfile/createUserProfile');
+    })->middleware(['auth', 'verified'])->name('createUserProfile');
+    Route::middleware('auth')->group(function () {
+        Route::post('/addUserProfile', [UserProfileController::class, 'create']);
         // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     });
