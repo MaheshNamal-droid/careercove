@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\View\View;
 use Illuminate\Http\Request;
 use App\Models\job_vacancy;
+
 use Auth;
 use Response;
 use Redirect;
@@ -59,6 +60,21 @@ class JobController extends Controller
             return response()->json('Unable to save data, please contact administrator !', 404); 
         }
     }
+
+    // view all job vacancies in table
+    public function index(): View
+    {
+        $job_vacancy = job_vacancy:: all();
+        return view ('JobVacancy.index') -> with ('JobVacancy', $job_vacancy);
+    }
+
+    //view one job vacancy
+    public function show($id): View
+    {
+        $job_vacancy = job_vacancy::findOrFail($id);
+        return view('JobVacancy.show', compact('job_vacancy'));
+    }
+
 // infinate scroll
     public function initiateScroll(Request $request)
     {

@@ -66,6 +66,11 @@ Route::middleware('auth')->group(function () {
     // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// View all job vacancies
+Route::get('/manageJobVacancies', [JobController::class, 'index']);
+
+// View one job vacancy
+Route::get('/JobVacancy/{id}', [JobController::class, 'show'])->name('JobVacancy.show');
 
 // job vacancy routes
 Route::get('/createVacancy', function () {
