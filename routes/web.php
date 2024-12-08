@@ -70,9 +70,11 @@ Route::middleware('auth')->group(function () {
 Route::get('/createVacancy', function () {
     return Inertia::render('Job/createVacancy');
 })->middleware(['auth', 'verified'])->name('createVacancy');
+
 Route::middleware('auth')->group(function () {
     Route::post('/addVacancy', [JobController::class, 'create']);
     // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
 require __DIR__.'/auth.php';
