@@ -1,15 +1,89 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 import React, { useState } from 'react';
+import Modal from '../../Components/Modal';
 
 
 export default function viewVacancy({ data, auth }) {
     console.log(data);
+    const [open, setOpen] = React.useState(false);
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    const handleOpen = () => {
+        console.log("tst");
+        setOpen(true);
+    };
+    const handleApply = async (e) => {
+        e.preventDefault();
+        
+        // Create FormData object to send form data and file
+        const form_data = new FormData();
+        form_data.append('jobid', data.id);
+        
+        try {
+          const response = await fetch('/applyVacancy', {
+            method: 'POST',
+            headers: {
+    
+                'X-CSRF-TOKEN': document.head.querySelector('meta[name="csrf-token"]')?.getAttribute('content'),
+            },
+            body: form_data,
+          });
+    
+          if (response.ok) {
+            alert('Applyed successfully!');
+            setOpen(true);
+          } else {
+            alert('Failed to Apply vacancy.');
+          }
+        } catch (error) {
+          console.error('Error adding vacancy:', error);
+        }
+      };
+
     return (
         <AuthenticatedLayout
             user={auth.user}
         // header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">View Vacancy{data.id}</h2>}
         >
+        <div
+            style={{
+                textAlign: "center",
+                display: "block",
+                padding: 30,
+                margin: "auto",
+            }}
+        >
+            <h1 style={{ color: "green" }}>
+                GeeksforGeeks
+            </h1>
+            <h4>Modal Component in ReactJS?</h4>
+            <button type="button" onClick={handleOpen}>
+                Click Me to Open Modal
+            </button>
+            <Modal
+                onClose={handleClose}
+                open={open}
+                style={{
+                    position: "absolute",
+                    border: "2px solid #000",
+                    backgroundColor: "lightgray",
+                    boxShadow: "2px solid black",
+                    height: 150,
+                    width: 240,
+                    margin: "auto",
+                    padding: "2%",
+                    color: "white",
+                }}
+            >
+                <>
+                    <h2>GFG</h2>
+                    <p>A computer science portal!</p>
+                </>
+            </Modal>
+        </div>
             <Head title="Dashboard" />
 
             <div className="dashboard_top_container">
@@ -37,7 +111,8 @@ export default function viewVacancy({ data, auth }) {
                             <div class="font-semibold text-1xl text-gray-800 leading-tight text-center mb-2">
                                 <a href={data.location} target="_blank" class="text-blue-500">View Location</a>
                             </div>
-                            <a href={`../applyVacancy/${data.id}`}
+                            <a  onClick={handleApply}
+                           
                                 class="flex flex-row items-center justify-center w-full px-4 py-4 mb-4 text-sm font-bold bg-green-300 leading-6 capitalize duration-100 transform rounded-sm shadow cursor-pointer focus:ring-4 focus:ring-green-500 focus:ring-opacity-50 focus:outline-none sm:mb-0 sm:w-auto sm:mr-4 md:pl-8 md:pr-6 xl:pl-12 xl:pr-10   hover:shadow-lg hover:-translate-y-1">
                                 Apply
                                 <span class="ml-4">

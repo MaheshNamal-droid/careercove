@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use App\Models\job_vacancy;
+use App\Models\applications;
+use App\Models\user_profile;
 
 use Auth;
 use Response;
@@ -98,12 +100,30 @@ class JobController extends Controller
            'data' => $vacancy
         ]);
     }
-    // approve vacancy
+    // apply vacancy
     public function applyVacancy(Request $request)
     {
-        $vacancy = job_vacancy::find($request->id);
-        $vacancy->status = 1;
-        $vacancy->save();
-        return Redirect::route('viewVacancy')->with( ['data' => $vacancy] );
+        // $vacancy = job_vacancy::find($request->id);
+        // $vacancy->status = 1;
+        // $vacancy->save();
+        // return Redirect::route('viewVacancy')->with( ['data' => $vacancy] );
+        $vacancy = job_vacancy::find($request->jobid);
+        $profile = user_profile::find(1);
+        $data = ([
+            "user_id"=>auth()->id(),
+            "job_id"=>$vacancy->id,
+            "profile_id"=>1,
+            "status"=>1,
+            "is_approved"=>0,
+        ]);
+        try{
+            $responsedata = applications::create($data);
+            return Response::json($responsedata);
+        } catch (\Illuminate\Database\QueryException $exception) {
+            // You can check get the details of the error using `errorInfo`:
+            $errorInfo = $exception->errorInfo;
+            //print_r($errorInfo);
+            return response()->json('Unable to save data, please contact administrator !', 404); 
+        }
     }
 }

@@ -42,7 +42,7 @@ Route::get('/viewVacancy', function () {
 })->middleware(['auth', 'verified'])->name('viewVacancy');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/applyVacancy/{id}', [JobController::class, 'applyVacancy']);
+    Route::POST('/applyVacancy', [JobController::class, 'applyVacancy']);
 });
 
 
