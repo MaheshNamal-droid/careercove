@@ -16,6 +16,8 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    protected $table = 'users';
+    protected $primaryKey = 'id';
     protected $fillable = [
         'name',
         'email',
@@ -44,4 +46,12 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    # one-to-one relationship between the User model and the user_profile model
+
+    public function profile()
+{
+    return $this->hasOne(user_profile::class, 'user_id');
+}
+
 }
