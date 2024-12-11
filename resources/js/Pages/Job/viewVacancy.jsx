@@ -7,6 +7,7 @@ import Modal from '../../Components/ModelSuccess';
 export default function viewVacancy({ data, auth }) {
     const [showModel, setShowModel] = useState(false);
     const [responsemsg, setResponsemsg] = useState(false);
+    const [responsestatus, setresponsestatus] = useState(false);
     const handleApply = async (e) => {
         e.preventDefault();
         
@@ -26,11 +27,13 @@ export default function viewVacancy({ data, auth }) {
     
           if (response.ok) {
            // alert('Applyed successfully!');
-            setResponsemsg("Applyed successfully!");
+            setResponsemsg("Your application has been submitted successfully!");
             setShowModel(true);
+            setresponsestatus(true);
           } else {
             setResponsemsg("Oops! Something went wrong. Please try again.");
             setShowModel(true);
+            setresponsestatus(false);
             // alert('Failed to Apply vacancy.');
           }
         } catch (error) {
@@ -43,7 +46,7 @@ export default function viewVacancy({ data, auth }) {
             user={auth.user}
         // header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">View Vacancy{data.id}</h2>}
         >
-            {showModel && <Modal onClose={() => setShowModel(false)} responsemsg={responsemsg}/>}
+            {showModel && <Modal onClose={() => setShowModel(false)} responsemsg={responsemsg} responsestatus={responsestatus}/>}
 
             <Head title="Dashboard" />
 
