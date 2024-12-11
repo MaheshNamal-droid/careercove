@@ -6,6 +6,7 @@ use App\Http\Controllers\JobController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\PromotionController;
+use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -104,5 +105,17 @@ Route::middleware('auth')->group(function () {
     // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+// View all users
+Route::get('/manageUsers', [UserController::class, 'index'])->name('users.index');
+
+// View one user
+Route::get('/user/{id}', [UserController::class, 'show'])->name('user.show');
+
+// Delete users
+Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+
+// POST route to handle view count increment requests
+Route::post('/dashboard/increment-view-count', [JobController::class, 'incrementViewCount'])->name('JobVacancy.incrementViewCount');
 
 require __DIR__.'/auth.php';

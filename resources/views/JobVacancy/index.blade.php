@@ -18,6 +18,7 @@
                                         <th>Job Title</th>
                                         <th>Company Name</th>
                                         <th>Location</th>
+                                        <th>View Count</th> <!-- New column for view count -->
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -25,17 +26,18 @@
                                      <!-- Loop through the $JobVacancy collection -->
                                     @foreach($JobVacancy as $item)
                                     <tr>
-                                        <td>{{ $loop -> iteration}}</td>  <!-- Serial number -->
+                                        <td>{{ $loop->iteration }}</td>  <!-- Serial number -->
                                          <!-- Display company logo -->
                                         <td>
                                             <img src="{{ asset('files/' . $item->company_logo) }}" alt="Company Logo" width="100">
                                         </td>
-                                        <td>{{ $item -> title}}</td>   <!-- Display job title -->
-                                        <td>{{ $item -> company_name}}</td>   <!-- Display company name -->
-                                        <td>{{ $item -> location}}</td>   <!-- Display job location -->
+                                        <td>{{ $item->title }}</td>   <!-- Display job title -->
+                                        <td>{{ $item->company_name }}</td>   <!-- Display company name -->
+                                        <td>{{ $item->location }}</td>   <!-- Display job location -->
+                                        <td>{{ $item->view_count }}</td>   <!-- Display job view count -->
                                          <!-- Action button to view job vacancy -->
                                         <td>
-                                            <a href="{{ url('/JobVacancy/' .$item->id)}}" title="View Job Vacancy">
+                                            <a href="{{ url('/JobVacancy/' . $item->id) }}" title="View Job Vacancy">
                                             <button class="btn btn-primary">
                                             <i class="fa fa-eye"></i> View</button>
                                             </a>

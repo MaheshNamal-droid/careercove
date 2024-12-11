@@ -126,4 +126,19 @@ class JobController extends Controller
             return response()->json('Unable to save data, please contact administrator !', 404); 
         }
     }
+
+
+    // Method to increment the view count for a job vacancy
+    public function incrementViewCount(Request $request)
+   {
+       // Find the job vacancy by its ID
+       $jobVacancy = job_vacancy::findOrFail($request->id);
+
+       // Increment the 'view_count' field by 1
+       $jobVacancy->increment('view_count');
+
+       // Return a JSON response indicating success
+       return response()->json(['success' => true]);
+   }
+
 }
