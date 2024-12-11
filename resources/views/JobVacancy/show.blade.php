@@ -58,7 +58,7 @@
                 </div>
                  <!-- Display Banner -->
                 <div class="text-center mb-4">
-                    <img src="{{ asset('files/' . $job_vacancy->files) }}" alt="Company Logo" class="img-fluid" style="max-width: 200px;">
+                    <img src="{{ asset('files/' . $job_vacancy->files) }}" alt="Company Logo" class="img-fluid" style="max-width: 1000px;">
                  </div>
                  <!-- Back Button -->
                 <div class="text-center mt-4">

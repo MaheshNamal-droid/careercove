@@ -1,11 +1,24 @@
 @extends('JobVacancy.layout')  <!-- Extending the layout -->
 @section('content')  <!-- Injecting content into the layout -->
     <div class="container my-5">
+   
         <div class="row">
             <div class="col-md-12">
                 <div class="card shadow-lg">  <!-- Card to display job vacancies -->
                     <div class="card-header bg-success text-white text-uppercase">  <!-- Card header with title -->
                         <h5>Manage Job Vacancies</h5>
+                    </div>
+                    <br>
+                    <div class="d-flex justify-content-center">
+                        <div class="col-md-9">
+                            <!-- Search form -->
+                            <form action="{{ route('JobVacancy.search') }}" method="GET">
+                                <div class="input-group">
+                                    <input type="text" name="query" class="form-control" placeholder="Search by Job Title or Company Name" value="{{ request('query') }}">
+                                    <button type="submit" class="btn btn-primary">Search</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">    <!-- Responsive table to display job vacancies -->
@@ -22,8 +35,8 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                     <!-- Loop through the $JobVacancy collection -->
-                                    @foreach($JobVacancy as $item)
+                                    <!-- Loop through the $JobVacancy collection -->
+                                    @forelse($JobVacancy as $item)
                                     <tr>
                                         <td>{{ $loop -> iteration}}</td>  <!-- Serial number -->
                                          <!-- Display company logo -->
@@ -35,15 +48,28 @@
                                         <td>{{ $item -> location}}</td>   <!-- Display job location -->
                                          <!-- Action button to view job vacancy -->
                                         <td>
+                                            <!-- Link to view the job vacancy details by passing the job vacancy ID to the route -->
                                             <a href="{{ url('/JobVacancy/' .$item->id)}}" title="View Job Vacancy">
                                             <button class="btn btn-primary">
                                             <i class="fa fa-eye"></i> View</button>
                                             </a>
+                                            <!-- Link to delete the job vacancy by passing the job vacancy ID to the 'JobVacancy.delete' route -->
+                                            <a href="{{ route('JobVacancy.delete', $item->id) }}" title="Delete Job Vacancy">
+                                            <button class="btn btn-danger"><i class="fa fa-trash"></i> Delete</button>
+                                            </a>
                                         </td>
                                     </tr>
-                                    @endforeach
+                                    @empty
+                                        <tr>
+                                            <td colspan="6" class="text-center">No results found for "{{ request('query') }}"</td>
+                                        </tr>
+                                    @endforelse
+
                                 </tbody>
                             </table>
+                        </div>
+                        <div>
+                            {{ $JobVacancy->links() }} <!-- Pagination links for job vacancies -->
                         </div>
                     </div>
                 </div>
@@ -51,3 +77,4 @@
         </div>
     </div>
 @endsection
+

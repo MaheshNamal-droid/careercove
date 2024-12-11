@@ -89,7 +89,7 @@ Route::get('/createUserProfile', function () {
     });
 
 // View all job vacancies
-Route::get('/manageJobVacancies', [JobController::class, 'index']);
+Route::get('/manageJobVacancies', [JobController::class, 'index'])->name('manageJobVacancies');
 
 // View one job vacancy
 Route::get('/JobVacancy/{id}', [JobController::class, 'show'])->name('JobVacancy.show');
@@ -104,5 +104,12 @@ Route::middleware('auth')->group(function () {
     // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+// Route to delete a job vacancy by ID
+Route::get('/deleteJobVacancy/{id}', [JobController::class, 'delete'])->name('JobVacancy.delete');
+
+//search job title or company name
+Route::get('/searchJobVacancies', [JobController::class, 'search'])->name('JobVacancy.search');
+
 
 require __DIR__.'/auth.php';

@@ -64,10 +64,10 @@ class JobController extends Controller
     // view all job vacancies in table
     public function index(): View
     {
-        $job_vacancy = job_vacancy:: all();
-        return view ('JobVacancy.index') -> with ('JobVacancy', $job_vacancy);
+        $job_vacancy = job_vacancy::where('status', '!=', 9)->paginate(10); // Exclude deleted records
+        return view('JobVacancy.index')->with('JobVacancy', $job_vacancy);
     }
-
+    
     //view one job vacancy
     public function show($id): View
     {
@@ -106,4 +106,31 @@ class JobController extends Controller
         $vacancy->save();
         return Redirect::route('viewVacancy')->with( ['data' => $vacancy] );
     }
+
+    // delete job vacancies from the list
+    public function delete($id)
+    {
+        $job_vacancy = job_vacancy::findOrFail($id);  // Find the job vacancy by its ID, if not found, an exception is thrown
+        $job_vacancy->status = 9; // Update status to 9
+        $job_vacancy->save();  // Save the changes to the database
+
+        // Redirect the user back to the 'manageJobVacancies' route with a success message
+        return redirect()->route('manageJobVacancies')->with('success', 'Job vacancy deleted successfully.');
+    }
+
+    // search job title or company name
+    public function search(Request $request)
+    {
+        $query = $request->input('query'); // Get the search query from the input field
+
+        $results = job_vacancy::where('status', '!=', 9) // Exclude deleted records
+            ->where(function ($q) use ($query) {
+                $q->where('title', 'like', '%' . $query . '%')
+                ->orWhere('company_name', 'like', '%' . $query . '%');
+            })
+            ->paginate(10); // Paginate the results
+
+        return view('JobVacancy.index', ['JobVacancy' => $results, 'query' => $query]); // Pass the results and the query to the view
+    }
+
 }
