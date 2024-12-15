@@ -12,6 +12,7 @@ use App\Http\Controllers\AppliedJobsController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
@@ -43,7 +44,7 @@ Route::get('/viewVacancy', function () {
     return Inertia::render('Job/viewVacancy');
 })->middleware(['auth', 'verified'])->name('viewVacancy');
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth','EnsureProfileIsCreated')->group(function () {
     Route::POST('/applyVacancy', [JobController::class, 'applyVacancy']);
 });
 

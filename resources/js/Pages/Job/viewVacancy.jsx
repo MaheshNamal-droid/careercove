@@ -8,6 +8,7 @@ export default function viewVacancy({ data, auth }) {
     const [showModel, setShowModel] = useState(false);
     const [responsemsg, setResponsemsg] = useState(false);
     const [responsestatus, setresponsestatus] = useState(false);
+    const [userprofilestatus, setuserprofilestatus] = useState(false);
     const handleApply = async (e) => {
         e.preventDefault();
         
@@ -19,7 +20,6 @@ export default function viewVacancy({ data, auth }) {
           const response = await fetch('/applyVacancy', {
             method: 'POST',
             headers: {
-    
                 'X-CSRF-TOKEN': document.head.querySelector('meta[name="csrf-token"]')?.getAttribute('content'),
             },
             body: form_data,
@@ -30,8 +30,14 @@ export default function viewVacancy({ data, auth }) {
             setResponsemsg("Your application has been submitted successfully!");
             setShowModel(true);
             setresponsestatus(true);
+            setuserprofilestatus(true);
           } else {
+            if(response. status===403){
+            setuserprofilestatus(false);
+            setResponsemsg("Oops! Create a user profile to apply vacancy.");   
+            }else{
             setResponsemsg("Oops! Something went wrong. Please try again.");
+            }
             setShowModel(true);
             setresponsestatus(false);
             // alert('Failed to Apply vacancy.');
@@ -46,7 +52,7 @@ export default function viewVacancy({ data, auth }) {
             user={auth.user}
         // header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">View Vacancy{data.id}</h2>}
         >
-            {showModel && <Modal onClose={() => setShowModel(false)} responsemsg={responsemsg} responsestatus={responsestatus}/>}
+            {showModel && <Modal onClose={() => setShowModel(false)} responsemsg={responsemsg} responsestatus={responsestatus} userprofilestatus={userprofilestatus} />}
 
             <Head title="Dashboard" />
 

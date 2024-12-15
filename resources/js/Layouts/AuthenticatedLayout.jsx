@@ -10,7 +10,7 @@ export default function Authenticated({ user, header, children }) {
 
     return (
         <div className="min-h-screen bg-gray-100">
-            <nav className="bg-white border-b border-gray-100">
+            <nav className="fixed top-0 w-full z-50 main_navbar">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between header_wrapper h-16">
                         <div className="flex" style={{ flexGrow : '2'}}>
@@ -42,7 +42,7 @@ export default function Authenticated({ user, header, children }) {
                                 </NavLink>
                             </div>
                         </div>
-                        <div class="flex" style={{ flexGrow : '2' , justifyContent : 'end'}}>
+                        <div className="flex" style={{ flexGrow : '2' , justifyContent : 'end'}}>
                             <div className="hidden sm:flex sm:items-center sm:ms-6">
                                 <NavLink href={route('createVacancy')} active={route().current('createVacancy')}>
                                   Announce Your Vacancy

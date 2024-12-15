@@ -4,9 +4,15 @@
 .header_wrapper{
     justify-content: center;
 }
-.dashboard_top_container{
+.dashboard_top_container,.dashboard_second_container{
     background-image: url('../../public/assets/images/careercove.jpg');
     background-repeat: no-repeat;
     /* background-size: 100% 100%;
     height: 100%; */
+}
+.main_navbar a {
+    color: rgb(217, 215, 215) !important;
+}
+.main_navbar a:hover {
+  color: white !important;
 }
