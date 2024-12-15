@@ -39,7 +39,7 @@
                                         <td>
                                             <!-- View button: Link to view the user details -->
                                             <a href="{{ url('/user/' . $item->id) }}" title="View User">
-                                                <button class="btn btn-info btn-sm">
+                                                <button class="btn btn-primary">
                                                     <i class="fa fa-eye"></i> View
                                                 </button>
                                             </a>
@@ -48,8 +48,8 @@
                                                 {{ method_field('DELETE') }}
                                                 {{ csrf_field() }}
                                                 <!-- Submit button for the delete action -->
-                                                <button type="submit" class="btn btn-danger btn-sm" title="Delete User" onclick="return confirm('Confirm delete?')">
-                                                    <i class="fa fa-trash-o"></i> Delete
+                                                <button type="submit" class="btn btn-danger" title="Delete User" onclick="return confirm('Confirm delete?')">
+                                                    <i class="fa fa-trash"></i> Delete
                                                 </button>
                                             </form>
                                         </td>
