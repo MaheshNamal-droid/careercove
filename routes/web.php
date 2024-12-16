@@ -124,5 +124,16 @@ Route::get('/deleteJobVacancy/{id}', [JobController::class, 'delete'])->name('Jo
 //search job title or company name
 Route::get('/searchJobVacancies', [JobController::class, 'search'])->name('JobVacancy.search');
 
+//administrator
+Route::get('/administrator', function () {
+    return Inertia::render('Admininistrator/Home');
+})->middleware(['auth', 'verified'])->name('administrator');
+Route::get('/administrator/users', function () {
+    return Inertia::render('Admininistrator/Users');
+})->middleware(['auth', 'verified'])->name('administrator');
+Route::middleware('auth','verified')->group(function () {
+    Route::get('/administrator/getUsers', [UserController::class, 'getUsers']);
+    Route::put('/administrator/deleteUser/{id}', [UserController::class, 'deleteUser']);
+});
 
 require __DIR__.'/auth.php';
