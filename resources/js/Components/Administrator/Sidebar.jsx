@@ -8,10 +8,13 @@ const Sidebar = () => {
       <nav>
         <ul>
           <li className="mb-4">
-            <Link to="/" className="hover:text-gray-300">Dashboard</Link>
+            <a href="/administrator" className="hover:text-gray-300">Dashboard</a>
           </li>
           <li className="mb-4">
-            <Link to="/Administrator/users" className="hover:text-gray-300">Users</Link>
+            <a href="/administrator/users" className="hover:text-gray-300">Users</a>
+          </li>
+          <li className="mb-4">
+            <a href="/administrator/promotions" className="hover:text-gray-300">Promotions</a>
           </li>
           <li>
             <Link to="/settings" className="hover:text-gray-300">Settings</Link>

@@ -44,11 +44,6 @@ export default function AdministratorLayout({ user, header, children }) {
                         </div>
                         <div className="flex" style={{ flexGrow : '2' , justifyContent : 'end'}}>
                             <div className="hidden sm:flex sm:items-center sm:ms-6">
-                                <NavLink href={route('createVacancy')} active={route().current('createVacancy')}>
-                                  Announce Your Vacancy
-                                </NavLink>
-                            </div>
-                            <div className="hidden sm:flex sm:items-center sm:ms-6">
                                 <div className="ms-3 relative">
                                     <Dropdown>
                                         <Dropdown.Trigger>

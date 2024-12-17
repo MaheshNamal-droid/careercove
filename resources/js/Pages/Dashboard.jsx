@@ -2,13 +2,18 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 import ModelVacancys from '../Components/ModelVacancys';
+import ModalPromo from '../Components/ModelPromotions';
 
 export default function Dashboard({ auth }) {
-
+    const [showModel, setShowModel] = useState(false);
+    useEffect(() => {
+        setShowModel(true);
+    }, []);
+    
     return (
         <AuthenticatedLayout user={auth.user}>
             <Head title="Dashboard" />
-
+            {showModel && <ModalPromo onClose={() => setShowModel(false)} />}
             <div className="dashboard_top_container">
                 <div className='inset-0 bg-black bg-opacity-50 flex justify-center items-center backdrop-brightness-75'>
                     <div className='flex flex-col gap-5 text-white mt-20 mb-20'>
