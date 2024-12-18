@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
-
+use Response;
 
 class UserController extends Controller
 {
@@ -19,6 +19,19 @@ class UserController extends Controller
          // Fetch users with pagination
         $users = User::where('status', 1)->paginate(10); // 10 users per page
         return view('users.index', compact('users'));
+    }
+
+    public function getUsers(Request $request){
+        $users = User::where('status', 1)->paginate(10); // 10 users per page
+        return Response::json($users);
+    }
+
+
+    public function deleteUser(Request $request){
+        $user = User::find($request->id);
+        $user->status = 9;
+        $user->save();
+        return Response::json($user);
     }
 
     /**

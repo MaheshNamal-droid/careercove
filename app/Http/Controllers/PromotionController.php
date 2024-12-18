@@ -58,6 +58,18 @@ class PromotionController extends Controller
            'data' => $promotion
         ]);
     }
+
+    // get all promotions
+    public function getPromotions()
+    {
+        $promotions = promotion::where('status', 1)->paginate(10);
+        return Response::json($promotions);
+    } 
+    
+    public function getRandomPromotion(){
+        $promotions = promotion::where('status', 1)->inRandomOrder()->first();
+        return Response::json($promotions);
+    }
 }
 
 ?>
