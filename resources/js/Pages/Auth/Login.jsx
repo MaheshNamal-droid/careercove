@@ -24,7 +24,9 @@ export default function Login({ status, canResetPassword }) {
     return (
         <GuestLayout>
             <Head title="Login" />
-
+            <h1 className='text-5xl mb-5 text-center'>Career Cove</h1>
+            <h1 className='text-3xl mb-5'>Login</h1>
+            <span className='mb-5'></span>
             {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
 
             <form onSubmit={submit}>
@@ -87,6 +89,7 @@ export default function Login({ status, canResetPassword }) {
                     </PrimaryButton>
                 </div>
             </form>
+            <div className='bg-gray-900 mt-5 text-white text-center py-2 rounded'>Don't have an account? <a href='/register' className='hover:text-gray-400'>Sign up here</a></div>
         </GuestLayout>
     );
 }

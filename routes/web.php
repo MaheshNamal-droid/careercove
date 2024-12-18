@@ -67,6 +67,7 @@ return Inertia::render('Promotion/createPromotion');
 })->middleware(['auth', 'verified'])->name('createPromotion');
 Route::middleware('auth')->group(function () {
     Route::post('/addPromotion', [PromotionController::class, 'create']);
+    Route::get('/getRandomPromotion', [PromotionController::class, 'getRandomPromotion']);
     // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
@@ -129,6 +130,25 @@ Route::get('/searchJobVacancies', [JobController::class, 'search'])->name('JobVa
 Route::get('/contactus', function () {
     return Inertia::render('ContactUs/contactus');
     })->middleware(['auth', 'verified'])->name('contactus');
+//administrator
+Route::get('/administrator', function () {
+    return Inertia::render('Admininistrator/Home');
+})->middleware(['auth', 'verified'])->name('administrator');
+Route::get('/administrator/users', function () {
+    return Inertia::render('Admininistrator/Users');
+})->middleware(['auth', 'verified'])->name('administrator');
+Route::middleware('auth','verified')->group(function () {
+    Route::get('/administrator/getUsers', [UserController::class, 'getUsers']);
+    Route::put('/administrator/deleteUser/{id}', [UserController::class, 'deleteUser']);
+});
+Route::get('/administrator/promotions', function () {
+    return Inertia::render('Admininistrator/Promotions');
+})->middleware(['auth', 'verified'])->name('administrator');
+
+Route::middleware('auth','verified')->group(function () {
+    Route::get('/administrator/getPromotions', [PromotionController::class, 'getPromotions']);
+    Route::put('/administrator/deletePromotion/{id}', [UserController::class, 'deleteUser']);
+});
 
 // logged-in users to view only their posted job vacancies
 Route::middleware(['auth', 'verified'])->group(function () {
