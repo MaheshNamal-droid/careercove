@@ -62,8 +62,11 @@ class PromotionController extends Controller
     // get all promotions
     public function getPromotions()
     {
-        $promotions = promotion::where('status', 1)->paginate(10);
-        return Response::json($promotions);
+        $promotions = promotion::where('status', 1)->paginate(2);
+       // return Response::json($promotions);
+        return Inertia::render('Admininistrator/Promotions', ['posts' => $promotions]);
+        // $promotions = promotion::where('status', 1)->paginate(10);
+        // return Response::json($promotions);
     } 
     
     public function getRandomPromotion(){
