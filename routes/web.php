@@ -9,6 +9,7 @@ use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MyPostedJobsController;
 use Illuminate\Foundation\Application;
+use App\Http\Controllers\AppliedJobsController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -126,6 +127,18 @@ Route::get('/deleteJobVacancy/{id}', [JobController::class, 'delete'])->name('Jo
 //search job title or company name
 Route::get('/searchJobVacancies', [JobController::class, 'search'])->name('JobVacancy.search');
 
+// Route to AboutUs page
+Route::get('/about', function () {
+    return Inertia::render('AboutUs/AboutUs');
+})->middleware(['auth', 'verified'])->name('about');
+
+// Route to my applied jobs
+Route::middleware('auth')->group(function () {
+    Route::get('/AppliedJobs', [AppliedJobsController::class, 'viewAppliedVacancies'])->name('myApplications');
+});
+
+// Route to view one applied job
+Route::get('/job-vacancy/{id}', [AppliedJobsController::class, 'show'])->name('jobVacancy.show');
 // contact us route
 Route::get('/contactus', function () {
     return Inertia::render('ContactUs/contactus');
@@ -171,3 +184,4 @@ Route::post('/jobVacancies/{id}/update', [MyPostedJobsController::class, 'update
 Route::delete('/administrator/removePromotion/{id}', [PromotionController::class, 'destroy']);
 
 require __DIR__.'/auth.php';
+
