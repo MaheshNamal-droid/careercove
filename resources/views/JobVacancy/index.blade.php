@@ -22,7 +22,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">    <!-- Responsive table to display job vacancies -->
-                            <table class="table table-striped">
+                            <table class="table table-hover table-striped">
                                 <thead>
                                     <tr class="table-info">
                                         <!-- Table headers for vacancy details -->

@@ -7,6 +7,7 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\MyPostedJobsController;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\AppliedJobsController;
 use Illuminate\Support\Facades\Route;
@@ -138,6 +139,10 @@ Route::middleware('auth')->group(function () {
 
 // Route to view one applied job
 Route::get('/job-vacancy/{id}', [AppliedJobsController::class, 'show'])->name('jobVacancy.show');
+// contact us route
+Route::get('/contactus', function () {
+    return Inertia::render('ContactUs/contactus');
+    })->middleware(['auth', 'verified'])->name('contactus');
 //administrator
 Route::get('/administrator', function () {
     return Inertia::render('Admininistrator/Home');
@@ -158,5 +163,23 @@ Route::middleware('auth','verified')->group(function () {
     Route::put('/administrator/deletePromotion/{id}', [UserController::class, 'deleteUser']);
 });
 
+// logged-in users to view only their posted job vacancies
+Route::middleware(['auth', 'verified'])->group(function () {
+        Route::get('/myPostedJobs', [MyPostedJobsController::class, 'index'])->name('myPostedJobs');
+    });
+
+// Route to display a specific job vacancy by its ID
+Route::get('/jobVacancies/{id}', [MyPostedJobsController::class, 'show'])->name('jobVacancies.show');
+
+// Route to delete a specific job vacancy by its ID
+Route::get('/deletejobVacancies/{id}', [MyPostedJobsController::class, 'delete'])->name('jobVacancies.delete');
+
+// Route to display the edit form for a specific job vacancy by its ID
+Route::get('/jobVacancies/{id}/edit', [MyPostedJobsController::class, 'edit'])->name('jobVacancies.edit');
+
+// Route to handle the update request for a specific job vacancy by its ID
+Route::post('/jobVacancies/{id}/update', [MyPostedJobsController::class, 'update'])->name('jobVacancies.update');
+
+    
 require __DIR__.'/auth.php';
 
