@@ -19,7 +19,7 @@ export default function Dashboard({ auth }) {
                     <div className='flex flex-col gap-5 text-white mt-20 mb-20'>
                         <div className='px-20 py-10 flex flex-col gap-5 items-center'>
                             <h1 className='text-2xl text-center'>The Easiest Way To Get Your Dream<br /> Job</h1>
-                            <p className='text-1xl text-center'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate est, consequuntur perferendis.</p>
+                            <p className='text-1xl text-center'>Find jobs that fit your skills, passions, and dreams.</p>
                             <div className='flex gap-5 flex-row text-black'>
                               <input type="text" className='bg-gray-100 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm ' placeholder='job title , company' />
                               <button class="bg-lime-500 hover:bg-lime-700 text-white font-bold py-2 px-4 rounded">Search</button>
@@ -33,7 +33,7 @@ export default function Dashboard({ auth }) {
                     <div className='flex flex-col gap-5 text-white'>
                         <div className='px-20 py-10 flex flex-col gap-5 items-center'>
                             <h1 className='text-2xl text-center'>CAREER COVE Site Stats</h1>
-                            <p className='text-1xl text-center'>Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br /> Cupiditate est, consequuntur perferendis.</p>
+                            <p className='text-1xl text-center'>Your gateway to career success - where opportunities and talent meet. </p>
                             <div className='flex gap-20 flex-row text-white'>
                                 <div className='flex flex-col gap-5'>
                                     <h1 className='text-2xl text-center font-black'>10300</h1>

@@ -167,5 +167,7 @@ Route::get('/jobVacancies/{id}/edit', [MyPostedJobsController::class, 'edit'])->
 // Route to handle the update request for a specific job vacancy by its ID
 Route::post('/jobVacancies/{id}/update', [MyPostedJobsController::class, 'update'])->name('jobVacancies.update');
 
-    
+// delete promotion from the manage promotion list
+Route::delete('/administrator/removePromotion/{id}', [PromotionController::class, 'destroy']);
+
 require __DIR__.'/auth.php';

@@ -74,141 +74,142 @@ const handleSubmit = async (e) => {
             <Head title="Dashboard" />
 
             <div className="dashboard_top_container">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 pt-10 pb-10">
-                    <div>
-                    <form onSubmit={handleSubmit} className="max-w-md mx-auto p-6 bg-white shadow-md rounded-md space-y-4">
-                        <div>
-                            <h3 className="block text-gray-700 font-semibold mb-2 text-lg text-center">New Vacancy</h3>
-                        </div> 
-                        <div>
-                            <label className="block text-gray-700 font-semibold mb-2">Job Title:</label>
-                            <input
-                            type="text"
-                            name="title"
-                            value={formData.title}
-                            onChange={handleChange}
-                            required
-                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
-                            />
+                <div className='inset-0 bg-black bg-opacity-50 flex justify-center items-center backdrop-brightness-75'>
+                   
+                        <div className ="pt-24">
+                        <form onSubmit={handleSubmit} className="max-w-md mx-auto p-12 bg-white shadow-lg rounded-md space-y-4">
+                            <div>
+                                <h3 className="text-2xl font-bold text-center mb-6">New Vacancy</h3>
+                            </div> 
+                            <div>
+                                <label className="block text-gray-700 font-semibold mb-2">Job Title:</label>
+                                <input
+                                type="text"
+                                name="title"
+                                value={formData.title}
+                                onChange={handleChange}
+                                required
+                                className="w-full px-4 py-2 border border-gray-500 rounded-md focus:outline-none focus:border-indigo-500"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-gray-700 font-semibold mb-2">Description:</label>
+                                <textarea 
+                                    name="description" 
+                                    rows={4} value={formData.description} 
+                                    onChange={handleChange}
+                                    className="w-full px-4 py-2 border border-gray-500 rounded-md focus:outline-none focus:border-indigo-500"
+                                    required>
+                                </textarea>
+                            </div>
+                            <div>
+                                <label className="block text-gray-700 font-semibold mb-2">Requirements:</label>
+                                <textarea
+                                    name='requirement'
+                                    rows={4}
+                                    value={formData.requirement}
+                                    onChange={handleChange}
+                                    className="w-full px-4 py-2 border border-gray-500 rounded-md focus:outline-none focus:border-indigo-500"
+                                    required>
+                                </textarea>
+                            </div>
+                            <div>
+                                <label className="block text-gray-700 font-semibold mb-2">Location:</label>
+                                <input
+                                type="text"
+                                name="location"
+                                value={formData.location}
+                                onChange={handleChange}
+                                required
+                                className="w-full px-4 py-2 border border-gray-500 rounded-md focus:outline-none focus:border-indigo-500"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-gray-700 font-semibold mb-2">Banner:</label>
+                                <input
+                                type="file"
+                                name="file"
+                                onChange={handleFileChange}
+                                required
+                                className="w-full"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-gray-700 font-semibold mb-2">Company Name:</label>
+                                <input
+                                type="text"
+                                name="company_name"
+                                value={formData.company_name}
+                                onChange={handleChange}
+                                required
+                                className="w-full px-4 py-2 border border-gray-500 rounded-md focus:outline-none focus:border-indigo-500"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-gray-700 font-semibold mb-2">Company Logo:</label>
+                                <input
+                                type="file"
+                                name="company_logo"
+                                onChange={handleFileChange2}
+                                required
+                                className="w-full"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-gray-700 font-semibold mb-2">Phone Number:</label>
+                                <input
+                                type="text"
+                                name="contact_phone"
+                                value={formData.contact_phone}
+                                onChange={handleChange}
+                                required
+                                className="w-full px-4 py-2 border border-gray-500 rounded-md focus:outline-none focus:border-indigo-500"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-gray-700 font-semibold mb-2">Email:</label>
+                                <input
+                                type="text"
+                                name="contact_email"
+                                value={formData.contact_email}
+                                onChange={handleChange}
+                                required
+                                className="w-full px-4 py-2 border border-gray-500 rounded-md focus:outline-none focus:border-indigo-500"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-gray-700 font-semibold mb-2">Address:</label>
+                                <input
+                                type="text"
+                                name="address"
+                                value={formData.address}
+                                onChange={handleChange}
+                                required
+                                className="w-full px-4 py-2 border border-gray-500 rounded-md focus:outline-none focus:border-indigo-500"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-gray-700 font-semibold mb-2">Closing Date:</label>
+                                <input
+                                type="date"
+                                name="closing_date"
+                                value={formData.closing_date}
+                                onChange={handleChange}
+                                required
+                                className="w-full px-4 py-2 border border-gray-500 rounded-md focus:outline-none focus:border-indigo-500"
+                                />
+                            </div>
+                            <button
+                                type="submit"
+                                className="w-full bg-lime-700  text-white py-2 px-4 rounded-lg text-lg font-medium  focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                            >
+                                Submit
+                            </button>
+                            </form>
                         </div>
-                        <div>
-                            <label className="block text-gray-700 font-semibold mb-2">Description:</label>
-                            <input
-                            type="text"
-                            name="description"
-                            value={formData.description}
-                            onChange={handleChange}
-                            required
-                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
-                            />
-                        </div>
-                        <div>
-                            <label className="block text-gray-700 font-semibold mb-2">Requirements:</label>
-                            <input
-                            type="text"
-                            name="requirement"
-                            value={formData.requirement}
-                            onChange={handleChange}
-                            required
-                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
-                            />
-                        </div>
-                        <div>
-                            <label className="block text-gray-700 font-semibold mb-2">Location:</label>
-                            <input
-                            type="text"
-                            name="location"
-                            value={formData.location}
-                            onChange={handleChange}
-                            required
-                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
-                            />
-                        </div>
-                        <div>
-                            <label className="block text-gray-700 font-semibold mb-2">Banner:</label>
-                            <input
-                            type="file"
-                            name="file"
-                            onChange={handleFileChange}
-                            required
-                            className="w-full"
-                            />
-                        </div>
-                        <div>
-                            <label className="block text-gray-700 font-semibold mb-2">Company Name:</label>
-                            <input
-                            type="text"
-                            name="company_name"
-                            value={formData.company_name}
-                            onChange={handleChange}
-                            required
-                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
-                            />
-                        </div>
-                        <div>
-                            <label className="block text-gray-700 font-semibold mb-2">Company Logo:</label>
-                            <input
-                            type="file"
-                            name="company_logo"
-                            onChange={handleFileChange2}
-                            required
-                            className="w-full"
-                            />
-                        </div>
-                        <div>
-                            <label className="block text-gray-700 font-semibold mb-2">Phone Number:</label>
-                            <input
-                            type="text"
-                            name="contact_phone"
-                            value={formData.contact_phone}
-                            onChange={handleChange}
-                            required
-                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
-                            />
-                        </div>
-                        <div>
-                            <label className="block text-gray-700 font-semibold mb-2">Email:</label>
-                            <input
-                            type="text"
-                            name="contact_email"
-                            value={formData.contact_email}
-                            onChange={handleChange}
-                            required
-                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
-                            />
-                        </div>
-                        <div>
-                            <label className="block text-gray-700 font-semibold mb-2">Address:</label>
-                            <input
-                            type="text"
-                            name="address"
-                            value={formData.address}
-                            onChange={handleChange}
-                            required
-                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
-                            />
-                        </div>
-                        <div>
-                            <label className="block text-gray-700 font-semibold mb-2">Closing Date:</label>
-                            <input
-                            type="date"
-                            name="closing_date"
-                            value={formData.closing_date}
-                            onChange={handleChange}
-                            required
-                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"
-                            />
-                        </div>
-                        <button
-                            type="submit"
-                            className="w-full bg-indigo-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                        >
-                            Submit
-                        </button>
-                        </form>
                     </div>
                 </div>
-            </div>
+           
         </AuthenticatedLayout>
     );
 }

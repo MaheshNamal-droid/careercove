@@ -9,9 +9,9 @@ export default function contactus({ auth }) {
 
             {/* Main container for the Contact Us page */}
             <div className="bg-gray-100">
-
+          
                 {/*Contact us section*/}        
-                <section className="shadow-lg p-10 mb-6"
+                <section className="shadow-lg p-10 mb-6 pt-24"
                     style={{
                         backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), url(https://img.freepik.com/free-photo/high-angle-desktop-with-laptop-copy-space_23-2148430882.jpg?t=st=1734104372~exp=1734107972~hmac=7d05451a301a745dc9ccb0a1641637f14b586e9f1bbe22dcd4b6b6bd0d0e9594&w=826)`,
                         backgroundSize: 'cover',
@@ -28,7 +28,7 @@ export default function contactus({ auth }) {
                         <br/> Connect with us to find your path <br/> and shape your future.</h2>
                     </div>
                 </section>
-
+                    
                 {/*Contact details section*/}
                 <section className="shadow-lg p-10 mb-6">
                     <div className="flex justify-center items-center space-x-20">

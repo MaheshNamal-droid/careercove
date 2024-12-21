@@ -70,6 +70,16 @@ class PromotionController extends Controller
         $promotions = promotion::where('status', 1)->inRandomOrder()->first();
         return Response::json($promotions);
     }
+
+    public function destroy($id)
+    {
+        $promotion = Promotion::findOrFail($id);
+        $promotion->status = 9; // Set the status to 9
+        $promotion->save();     // Save the updated status
+
+        return response()->json(['message' => 'Promotion status updated successfully!']);
+    }
+
 }
 
 ?>
