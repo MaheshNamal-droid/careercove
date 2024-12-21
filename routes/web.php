@@ -158,5 +158,26 @@ Route::middleware('auth','verified')->group(function () {
     Route::put('/administrator/deletePromotion/{id}', [UserController::class, 'deleteUser']);
 });
 
+// Administrator routes for job vacancies
+// Route to manage job vacancies
+Route::get('/administrator/manageJobVacancies', function () {
+    return Inertia::render('Admininistrator/JobVacancies');
+})->middleware(['auth', 'verified'])->name('administrator');
+
+// Route to get all job vacancies
+Route::middleware('auth', 'verified')->group(function () {
+    Route::get('/administrator/getJobVacancies', [JobController::class, 'getJobVacancies']);
+// Route to delete a job vacancy
+    Route::put('/administrator/deleteJobVacancy/{id}', [JobController::class, 'deleteJobVacancy']);
+});
+// Route to increment the view count for a job vacancy
+Route::put('/administrator/incrementViewCountOfJob/{id}', [JobController::class, 'incrementViewCountOfJob']);
+
+// Route to user applied jobs
+Route::get('/applied-jobs', function () {
+    return inertia('UserAppliedJobs/UserAppliedJobs');  
+})->name('user.applied-jobs');
+
+
 require __DIR__.'/auth.php';
 

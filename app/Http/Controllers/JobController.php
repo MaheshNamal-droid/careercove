@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\job_vacancy;
 use App\Models\applications;
 use App\Models\user_profile;
+use Illuminate\Http\RedirectResponse;
 
 use Auth;
 use Response;
@@ -165,5 +166,63 @@ class JobController extends Controller
 
         return view('JobVacancy.index', ['JobVacancy' => $results, 'query' => $query]); // Pass the results and the query to the view
     }
+
+
+
+
+
+
+    
+
+
+
+// Controller Method to Get Job Vacancies
+public function getJobVacancies(Request $request)
+{
+    $query = $request->query('query'); // Get search query parameter
+    $vacanciesQuery = job_vacancy::where('status', '!=', 9);
+
+    if ($query) {
+        // Filter by job title or company name
+        $vacanciesQuery->where(function ($q) use ($query) {
+            $q->where('title', 'like', '%' . $query . '%')
+              ->orWhere('company_name', 'like', '%' . $query . '%');
+        });
+    }
+
+    $vacancies = $vacanciesQuery->paginate(10); // 10 job vacancies per page
+    return response()->json($vacancies);
+}
+
+
+// Controller Method to Delete a Job Vacancy
+public function deleteJobVacancy(Request $request, $id)
+{
+    $vacancy = job_vacancy::find($id);
+
+    if ($vacancy) {
+        // Perform delete by updating the status
+        $vacancy->status = 9; 
+        $vacancy->save();
+
+        return response()->json($vacancy);
+    }
+
+    return response()->json(['message' => 'Job vacancy not found'], 404);
+}
+
+
+
+
+//  Controller Method to Increment the View Count of a Job Vacancy
+public function incrementViewCountOfJob($id)
+{
+    $vacancy = job_vacancy::find($id);
+
+    if ($vacancy) {
+        $vacancy->increment('view_count'); // Increment view count
+    }
+
+}
 
 }
