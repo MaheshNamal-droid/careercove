@@ -38,8 +38,8 @@ export default function Authenticated({ user, header, children }) {
                                 <NavLink href={route('dashboard')} active={route().current('dashboardd')}>
                                     Blog
                                 </NavLink>
-                                <NavLink href={route('dashboard')} active={route().current('dashboardd')}>
-                                    Contact
+                                <NavLink href={route('contactus')} active={route().current('contactus')}>
+                                    Contact Us
                                 </NavLink>
                             </div>
                         </div>

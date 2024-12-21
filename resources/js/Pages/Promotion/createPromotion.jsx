@@ -66,7 +66,7 @@ export default function createPromotion({ auth }) {
                     <div className="w-full">
                         <h1 class="text-3xl md:text-3xl font-medium mb-2 pl-4 pt-4">New Promotion</h1>
                         <div className='flex ml-4'>
-                            <a href="/administrator/promotions" className='rounded-lg px-4 py-2 bg-blue-500 text-blue-100 hover:bg-blue-600 duration-300 flex items-center'><ArrowLeft size={20} /> Back</a>
+                            <a href="/administrator/getPromotions" className='rounded-lg px-4 py-2 bg-blue-500 text-blue-100 hover:bg-blue-600 duration-300 flex items-center'><ArrowLeft size={20} /> Back</a>
                         </div>
                         <form onSubmit={handleSubmit} className="max-w-md mx-auto p-6 bg-white shadow-md rounded-md space-y-4">
                             <div>

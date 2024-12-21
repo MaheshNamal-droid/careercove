@@ -18,6 +18,7 @@ const Sidebar = () => {
           </li>
           <li className="mb-4">
             <a href="/administrator/promotions" className="hover:text-gray-300">Promotions</a>
+            <a href="/administrator/getPromotions" className="hover:text-gray-300">Promotions</a>
           </li>
           <li>
             <Link to="/settings" className="hover:text-gray-300">Settings</Link>
