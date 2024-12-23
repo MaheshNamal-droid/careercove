@@ -58,7 +58,7 @@ class MyPostedJobsController extends Controller
         // Update the job vacancy data
         $jobVacancy->update($validatedData);
 
-        // Redirect back with a success message
+       // Redirect back with a success message
         return redirect()->route('myPostedJobs')->with('success', 'Job vacancy updated successfully.');
     }
 
@@ -73,4 +73,5 @@ class MyPostedJobsController extends Controller
         return redirect()->route('myPostedJobs')->with('success', 'Job vacancy deleted successfully.');
     }
 
+   
 }

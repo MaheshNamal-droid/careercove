@@ -4,8 +4,10 @@ import { useEffect, useState } from 'react';
 import ModelVacancys from '../Components/ModelVacancys';
 import ModalPromo from '../Components/ModelPromotions';
 
-export default function Dashboard({ auth }) {
+export default function Dashboard({ auth, candidates, jobsPosted, companies }) {
+
     const [showModel, setShowModel] = useState(false);
+
     useEffect(() => {
         setShowModel(true);
     }, []);
@@ -36,19 +38,15 @@ export default function Dashboard({ auth }) {
                             <p className='text-1xl text-center'>Your gateway to career success - where opportunities and talent meet. </p>
                             <div className='flex gap-20 flex-row text-white'>
                                 <div className='flex flex-col gap-5'>
-                                    <h1 className='text-2xl text-center font-black'>10300</h1>
+                                    <h1 className='text-2xl text-center font-black'>{candidates}</h1>
                                     <p className='text-xs text-center'>Candidates</p>
                                 </div>
                                 <div className='flex flex-col gap-5'>
-                                    <h1 className='text-2xl text-center font-black'>28</h1>
+                                    <h1 className='text-2xl text-center font-black'>{jobsPosted}</h1>
                                     <p className='text-xs text-center'>Jobs Posted</p>
                                 </div>
                                 <div className='flex flex-col gap-5'>
-                                    <h1 className='text-2xl text-center font-black'>62</h1>
-                                    <p className='text-xs text-center'>Jobs Filled</p>
-                                </div>
-                                <div className='flex flex-col gap-5'>
-                                    <h1 className='text-2xl text-center font-black'>286</h1>
+                                    <h1 className='text-2xl text-center font-black'>{companies}</h1>
                                     <p className='text-xs text-center'>Companies</p>
                                 </div>
                             </div>

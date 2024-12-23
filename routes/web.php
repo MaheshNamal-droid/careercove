@@ -8,6 +8,7 @@ use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MyPostedJobsController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\AppliedJobsController;
 use Illuminate\Support\Facades\Route;
@@ -61,7 +62,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
+    
 // promotion route
 Route::get('/createPromotion', function () {
 return Inertia::render('Promotion/createPromotion');
@@ -182,6 +183,12 @@ Route::post('/jobVacancies/{id}/update', [MyPostedJobsController::class, 'update
 
 // delete promotion from the manage promotion list
 Route::delete('/administrator/removePromotion/{id}', [PromotionController::class, 'destroy']);
+
+// count job vacancies, applied users and companies
+Route::get('/dashboard', [DashboardController::class, 'getDashboardStats'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
+
 
 require __DIR__.'/auth.php';
 
