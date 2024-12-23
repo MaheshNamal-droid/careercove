@@ -225,4 +225,18 @@ public function incrementViewCountOfJob($id)
 
 }
 
+
+// Search Job Vacancies in dashboard
+public function searchVacancies(Request $request)
+{
+    $searchTerm = $request->get('search', ''); // Get search query parameter
+    $jobs = job_vacancy::query()
+        ->where('title', 'LIKE', "%{$searchTerm}%")
+        ->orWhere('company_name', 'LIKE', "%{$searchTerm}%")
+        ->get(); // Fetch all matching results
+
+    return response()->json($jobs);
+}
+
+
 }

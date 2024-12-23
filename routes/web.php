@@ -201,6 +201,8 @@ Route::get('/jobVacancies/{id}/edit', [MyPostedJobsController::class, 'edit'])->
 // Route to handle the update request for a specific job vacancy by its ID
 Route::post('/jobVacancies/{id}/update', [MyPostedJobsController::class, 'update'])->name('jobVacancies.update');
 
-    
+// Route to search for job vacancies in the dashboard
+Route::get('/search-vacancies', [JobController::class, 'searchVacancies']); 
+
 require __DIR__.'/auth.php';
 
