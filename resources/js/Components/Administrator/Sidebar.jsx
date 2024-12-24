@@ -17,7 +17,6 @@ const Sidebar = () => {
             <a href="/administrator/manageJobVacancies" className="hover:text-gray-300">Job Vacancies</a>
           </li>
           <li className="mb-4">
-            <a href="/administrator/promotions" className="hover:text-gray-300">Promotions</a>
             <a href="/administrator/getPromotions" className="hover:text-gray-300">Promotions</a>
           </li>
           <li>

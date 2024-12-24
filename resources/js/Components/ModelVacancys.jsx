@@ -22,7 +22,7 @@ function ModelVacancys({ searchTerm }) {
 
     // Load more vacancies when scrolled to the end
     useEffect(() => {
-        loadVacancies();
+        //loadVacancies();
         window.onscroll = function () {
             if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
                 loadVacancies();
