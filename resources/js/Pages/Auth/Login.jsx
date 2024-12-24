@@ -62,7 +62,7 @@ export default function Login({ status, canResetPassword }) {
                             type="email"
                             name="email"
                             value={data.email}
-                            className="block w-full mt-1 px-10 py-3 text-gray-800 border border-green-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                            className="block w-full mt-1 px-4 py-3 text-gray-800 border border-green-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
                             autoComplete="username"
                             isFocused={true}
                             onChange={(e) => setData('email', e.target.value)}
@@ -80,7 +80,7 @@ export default function Login({ status, canResetPassword }) {
                             type={showPassword ? 'text' : 'password'}
                             name="password"
                             value={data.password}
-                            className="block w-full mt-1 px-10 py-3 text-gray-800 border border-green-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                            className="block w-full mt-1 px-4 py-3 text-gray-800 border border-green-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
                             autoComplete="current-password"
                             onChange={(e) => setData('password', e.target.value)}
                         />
@@ -119,57 +119,6 @@ export default function Login({ status, canResetPassword }) {
                     </PrimaryButton>
                 </div>
 
-                {/* OR separator */}
-                <div className="flex items-center mt-6 justify-center">
-                    <div className="flex-grow border-t border-[#1A5319]"></div>
-                    <span className="mx-4 text-[#1A5319]">OR</span>
-                    <div className="flex-grow border-t border-[#1A5319]"></div>
-                </div>
-
-                {/* Social Login Buttons */}
-                <div className="mt-4 flex items-center justify-center space-x-4">
-                    {/* Facebook Login */}
-                    <a
-                        href="https://web.facebook.com/login.php/?_rdc=1&_rdr"
-                        className="w-10 h-10 bg-gray-100 rounded-full hover:bg-[#C1E2A4] flex justify-center items-center"
-                        target="_blank"
-
-                    >
-                        <img
-                            src="/assets/images/facebook.png"
-                            alt="Facebook"
-                            className="w-6 h-6"
-                        />
-                    </a>
-
-                    {/* Google Login */}
-                    <a
-                        href="https://accounts.google.com/"
-                        className="w-10 h-10 bg-gray-100 rounded-full hover:bg-[#C1E2A4] flex justify-center items-center"
-                        target="_blank"
-                    >
-                        <img
-                            src="/assets/images/google.png"
-                            alt="Google"
-                            className="w-6 h-6"
-                        />
-                    </a>
-
-                    {/* LinkedIn Login */}
-                    <a
-                        href="https://lk.linkedin.com/"
-                        className="w-10 h-10 bg-gray-100 rounded-full hover:bg-[#C1E2A4] flex justify-center items-center"
-                        target="_blank"
-                    >
-                        <img
-                            src="/assets/images/linkedin.png"
-                            alt="LinkedIn"
-                            className="w-6 h-6"
-                        />
-                    </a>
-                </div>
-
-
                 {/* Sign up link */}
                 <div className="bg-[#1A4D2E] text-white py-3 px-4 rounded-lg w-full text-center mt-6">
                     Don't have an account?{' '}
@@ -182,5 +131,5 @@ export default function Login({ status, canResetPassword }) {
                 </div>
             </form>
         </GuestLayout>
-    );
+    );
 }

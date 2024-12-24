@@ -1,7 +1,9 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 import React from 'react';
-import { MapPin, Phone, Mail, Facebook , Youtube, Linkedin, Twitter , Instagram } from 'lucide-react';
+import { MapPin, Phone, Mail, } from 'lucide-react';
+import Footer from '../../Components/Footer';
+
 
 export default function contactus({ auth }) {
     return(
@@ -80,30 +82,11 @@ export default function contactus({ auth }) {
                     <p className="text-md mt-8">We're here to help. Contact us at +94 113 456 789</p>
                 </section>
 
-                {/* Social media Section */}
-                <section className="text-center bg-black flex justify-center flex-col py-12">
-                    <h2 className="text-xl text-white font-bold mb-6">Follow Us</h2>
-
-                    <div className="flex justify-center space-x-8">
-                        <a href="https://facebook.com/" className="text-blue-700 hover:text-white">
-                        <Facebook className="w-6 h-6 hover:scale-110 transition duration-300" />
-                        </a>
-                        <a href="https://www.youtube.com/" className="text-red-600 hover:text-white">
-                        <Youtube className="w-6 h-6 hover:scale-110 transition duration-300" />
-                        </a>
-                        <a href="https://www.linkedin.com/" className="text-blue-500 hover:text-white">
-                        <Linkedin className="w-6 h-6 hover:scale-110 transition duration-300" />
-                        </a>
-                        <a href="https://x.com/" className="text-blue-400 hover:text-white">
-                        <Twitter className="w-6 h-6 hover:scale-110 transition duration-300" />
-                        </a>
-                        <a href="https://www.instagram.com/" className="text-pink-400 hover:text-white">
-                        <Instagram className="w-6 h-6 hover:scale-110 transition duration-300" />
-                        </a>
-                    </div>
-                </section>
+                
             </div>
-            
+
+            {/* Footer Section */}
+            <Footer />
         </AuthenticatedLayout>
     );
 }

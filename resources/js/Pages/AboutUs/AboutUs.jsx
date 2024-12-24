@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Link } from '@inertiajs/react';
-import { Briefcase, Target, Shield, Heart, Rocket, Lightbulb, Users, TrendingUp, Handshake, BriefcaseBusiness, HelpCircle, UserPlus, Send, Facebook, Twitter, Linkedin, Instagram, Youtube } from 'lucide-react';  // Importing Lucide icons
-
+import { Briefcase, Target, Shield, Heart, Rocket, Lightbulb, Users, TrendingUp, Handshake, BriefcaseBusiness, } from 'lucide-react';  // Importing Lucide icons
+import Footer from '../../Components/Footer';
 
 function AboutUs({ auth }) {
   return (
@@ -257,89 +257,8 @@ function AboutUs({ auth }) {
           </div>
         </section>
 
-
-
-        {/* FAQ Section */}
-        <section className="py-12 bg-gray-100">
-          {/* Section Header */}
-          <h2 className="text-4xl font-semibold text-center text-[#89BA16] mb-8">FAQs</h2>
-
-          {/* FAQs Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 px-4 lg:px-12">
-            {/* FAQ Item 1 */}
-            <div className="bg-white shadow-md p-6 rounded-lg transition-transform hover:shadow-lg hover:translate-y-[-3px]">
-              <HelpCircle className="text-[#89BA16] h-8 w-8 mb-2 mx-auto" />
-              <h3 className="text-lg font-medium text-center text-gray-800 mb-2">Create a Profile</h3>
-              <p className="text-gray-600 text-2xs text-center">
-                Sign up, fill in details, and start building your profile.
-              </p>
-            </div>
-
-            {/* FAQ Item 2 */}
-            <div className="bg-white shadow-md p-6 rounded-lg transition-transform hover:shadow-lg hover:translate-y-[-3px]">
-              <UserPlus className="text-[#89BA16] h-8 w-8 mb-2 mx-auto" />
-              <h3 className="text-lg font-medium text-center text-gray-800 mb-2">Apply for Jobs</h3>
-              <p className="text-gray-600 text-2xs text-center">
-                Browse jobs, view details, and click "Apply"
-              </p>
-            </div>
-
-            {/* FAQ Item 3 */}
-            <div className="bg-white shadow-md p-6 rounded-lg transition-transform hover:shadow-lg hover:translate-y-[-3px]">
-              <Briefcase className="text-[#89BA16] h-8 w-8 mb-2 mx-auto" />
-              <h3 className="text-lg font-medium text-center text-gray-800 mb-1">Connect with Candidates</h3>
-              <p className="text-gray-600 text-2xs text-center">
-                Search candidates or post jobs to receive applications.
-              </p>
-            </div>
-
-            {/* FAQ Item 4 */}
-            <div className="bg-white shadow-md p-6 rounded-lg transition-transform hover:shadow-lg hover:translate-y-[-3px]">
-              <Send className="text-[#89BA16] h-8 w-8 mb-2 mx-auto" />
-              <h3 className="text-lg font-medium text-center text-gray-800 mb-1">Track Applications</h3>
-              <p className="text-gray-600 text-2xs text-center">
-                Use the dashboard to monitor your application status.
-              </p>
-            </div>
-          </div>
-        </section>
-
-
-
-        {/* Footer Section */}
-        <section className="relative bg-gradient-to-r from-[#89BA16] to-[#4CAF50] text-white text-center py-16 overflow-hidden">
-          {/* Background Overlay */}
-          <div className="absolute inset-0 bg-opacity-90"></div>
-
-          {/* Content */}
-          <div className="relative z-10 px-6">
-            <h2 className="text-3xl font-semibold">Ready to Shape Your Future?</h2>
-
-            {/* Description */}
-            <p className="mt-4 text-lg">
-              Join CareerCove today and take the first step toward your next great opportunity.
-            </p>
-
-            {/* Social Media Links */}
-            <div className="flex justify-center gap-6 mt-8">
-              <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" className="hover:opacity-80">
-                <Facebook size={32} strokeWidth={2} className="text-white" />
-              </a>
-              <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" className="hover:opacity-80">
-                <Youtube size={38} strokeWidth={2} className="text-white" />
-              </a>
-              <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:opacity-80">
-                <Linkedin size={32} strokeWidth={2} className="text-white" />
-              </a>
-              <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer" className="hover:opacity-80">
-                <Twitter size={32} strokeWidth={2} className="text-white" />
-              </a>
-              <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" className="hover:opacity-80">
-                <Instagram size={32} strokeWidth={2} className="text-white" />
-              </a>
-            </div>
-          </div>
-        </section>
+        {/* Footer */}
+        <Footer />
 
       </div>
     </AuthenticatedLayout>
