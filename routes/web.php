@@ -139,6 +139,7 @@ Route::get('/about', function () {
 
 // Route to my applied jobs
 Route::middleware('auth')->group(function () {
+    Route::get('/userDashboard/getApplications', [AppliedJobsController::class, 'getApplications']);
     Route::get('/AppliedJobs', [AppliedJobsController::class, 'viewAppliedVacancies'])->name('myApplications');
 });
 
