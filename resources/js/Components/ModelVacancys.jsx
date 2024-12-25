@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 
 function ModelVacancys({ searchTerm }) {
-
     const [jobdata, setData] = useState([]);
     const [request_page, setRequestPage] = useState(0);
 
@@ -14,7 +13,7 @@ function ModelVacancys({ searchTerm }) {
                 throw new Error(`Response status: ${response.status}`);
             }
             const json = await response.json();
-            setData((prevData) => prevData.concat(json.data)); // Append new data
+            setData(jobdata.concat(json.data));  // Append data to existing jobs
             setRequestPage(json.current_page + 1);
         } catch (error) {
             console.error(error.message);
@@ -29,12 +28,7 @@ function ModelVacancys({ searchTerm }) {
                 loadVacancies();
             }
         };
-        window.addEventListener("scroll", handleScroll);
-
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-        };
-    }, [request_page]);
+    }, [jobdata, request_page]);
 
     // Filter jobs by search term
     const filteredJobs = searchTerm
@@ -44,14 +38,34 @@ function ModelVacancys({ searchTerm }) {
         )
         : jobdata;
 
-    // Navigate to review form with job_id
-    const navigateToReviewForm = (jobId) => {
-        window.location.href = `/createReview/${jobId}`;
+    // View job vacancy and increment the view count
+    const viewVacancy = async (id) => {
+        // Send a POST request to increment the view count of the job vacancy
+        try {
+            const response = await fetch('/dashboard/increment-view-count', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json', // Set the content type to JSON
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content, // CSRF token
+                },
+                body: JSON.stringify({ id }), // Send the job vacancy ID in the request body as a JSON object
+            });
+
+            const result = await response.json();
+            // Check if the view count increment successfully
+            if (result.success) {
+                window.location.href = `/dashboard/${id}`;
+            } else {
+                console.error('Failed to increment view count');
+            }
+        } catch (error) {
+            console.error('Error incrementing view count:', error);
+        }
     };
 
-    // View job vacancy
-    const viewVacancy = (jobId) => {
-        window.location.href = `/dashboard/${jobId}`;
+    // Navigate to review form with job_id
+       const navigateToReviewForm = (jobId) => {
+        window.location.href = `/createReview/${jobId}`;
     };
 
     return (
@@ -65,6 +79,7 @@ function ModelVacancys({ searchTerm }) {
                                     key={job.id}
                                     className="flex flex-row mb-2 border-solid border rounded-sm hover:bg-gray-100"
                                     onClick={() => viewVacancy(job.id)}
+                                    style={{ color: '#edeaea4a' }}
                                 >
                                     <div className="w-1/4 p-2">
                                         <div className="size-16 place-content-center ml-10">
@@ -85,6 +100,7 @@ function ModelVacancys({ searchTerm }) {
                                     <div className="w-1/4 inline-flex items-center">
                                         <p style={{ fontSize: 14, color: 'black' }}>{job.full_or_part_time}</p>
                                     </div>
+
                                     <div className="w-1/4 inline-flex items-center">
                                         <button
                                             onClick={(e) => {
@@ -96,6 +112,7 @@ function ModelVacancys({ searchTerm }) {
                                             Review
                                         </button>
                                     </div>
+
                                 </div>
                             ))
                         ) : (
@@ -109,4 +126,3 @@ function ModelVacancys({ searchTerm }) {
 }
 
 export default ModelVacancys;
-
