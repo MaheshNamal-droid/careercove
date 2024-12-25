@@ -1,5 +1,3 @@
-
-
 import { useEffect, useState } from 'react';
 
 function ModelVacancys({ searchTerm }) {
@@ -25,8 +23,8 @@ function ModelVacancys({ searchTerm }) {
 
     // Load more vacancies when scrolled to the end
     useEffect(() => {
-        loadVacancies();
-        const handleScroll = () => {
+        //loadVacancies();
+        window.onscroll = function () {
             if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
                 loadVacancies();
             }

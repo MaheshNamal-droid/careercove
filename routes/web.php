@@ -16,14 +16,17 @@ use Inertia\Inertia;
 
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+    return Inertia::render('Dashboard');
+    // return Inertia::render('Welcome', [
+    //     'canLogin' => Route::has('login'),
+    //     'canRegister' => Route::has('register'),
+    //     'laravelVersion' => Application::VERSION,
+    //     'phpVersion' => PHP_VERSION,
+    // ]);
 });
-
+Route::get('/home', function () {
+    return Inertia::render('Dashboard');
+})->name('home');
 // admin routes
 Route::get('/administrator', function () {
     return Inertia::render('Admin/Home');
@@ -34,22 +37,21 @@ Route::get('/administrator/users', function () {
 // dashboard routes
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+Route::withoutMiddleware('auth')->group(function () {
     Route::get('/dashboard/initiateScroll', [JobController::class, 'initiateScroll']);
 });
-Route::middleware('auth')->group(function () {
+Route::withoutMiddleware('auth')->group(function () {
     Route::get('/dashboard/{id}', [JobController::class, 'getVacancy']);
 });
 Route::get('/viewVacancy', function () {
     return Inertia::render('Job/viewVacancy');
-})->middleware(['auth', 'verified'])->name('viewVacancy');
+})->withoutMiddleware(['auth', 'verified'])->name('viewVacancy');
 
 Route::middleware('auth','EnsureProfileIsCreated')->group(function () {
     Route::POST('/applyVacancy', [JobController::class, 'applyVacancy']);
 });
-
 
 
 Route::middleware('auth')->group(function () {
@@ -67,9 +69,11 @@ Route::middleware('auth')->group(function () {
 Route::get('/createPromotion', function () {
 return Inertia::render('Promotion/createPromotion');
 })->middleware(['auth', 'verified'])->name('createPromotion');
+
+Route::get('/getRandomPromotion', [PromotionController::class, 'getRandomPromotion']);
+
 Route::middleware('auth')->group(function () {
     Route::post('/addPromotion', [PromotionController::class, 'create']);
-    Route::get('/getRandomPromotion', [PromotionController::class, 'getRandomPromotion']);
     // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
@@ -207,8 +211,14 @@ Route::delete('/administrator/removePromotion/{id}', [PromotionController::class
 
 // count job vacancies, applied users and companies
 Route::get('/dashboard', [DashboardController::class, 'getDashboardStats'])
-    ->middleware(['auth', 'verified'])
+    ->withoutMiddleware(['auth', 'verified'])
     ->name('dashboard');
+Route::get('/home', [DashboardController::class, 'getDashboardStats'])
+    ->withoutMiddleware(['auth', 'verified'])
+    ->name('home');
+Route::get('/', [DashboardController::class, 'getDashboardStats'])
+    ->withoutMiddleware(['auth', 'verified'])
+    ->name('home');
 
 // Route to search for job vacancies in the dashboard
 Route::get('/search-vacancies', [JobController::class, 'searchVacancies']); 
@@ -221,6 +231,10 @@ Route::get('/createReview/{job_id}', function ($job_id) {
 })->middleware(['auth', 'verified'])->name('createReview');
 Route::post('/addReview', [ReviewController::class, 'create']);
 
+// user dashboard
+Route::get('/userDashboard', function () {
+    return Inertia::render('userDashboard/home');
+})->middleware(['auth', 'verified'])->name('userDashboard');
 
 require __DIR__.'/auth.php';
 

@@ -5,19 +5,18 @@ import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { Link } from '@inertiajs/react';
 
-
-export default function Authenticated({ user, header, children }) {
+export default function UserDashboardLayout({ user, header, children }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
 
     return (
         <div className="min-h-screen bg-gray-100">
-            <nav className="fixed top-0 w-full z-50 main_navbar">
+            <nav className="top-0 w-full z-50 bg-gray-800">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between header_wrapper h-16">
                         <div className="flex" style={{ flexGrow : '2'}}>
                             <div className="shrink-0 flex items-center">
                                 <Link href="/">
-                                <object data="../../assets/images/cc_logo.svg" type="image/svg+xml" class="logo w-12"> </object>
+                                    <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800" />
                                 </Link>
                             </div>
                         </div>
@@ -26,21 +25,24 @@ export default function Authenticated({ user, header, children }) {
                                 <NavLink href={route('dashboard')} active={route().current('dashboard')}>
                                     Home
                                 </NavLink>
-                                <NavLink href={route('about')} active={route().current('about')}>
+                                <NavLink href={route('dashboard')} active={route().current('dashboardd')}>
                                     About
                                 </NavLink>
-                                <NavLink href={route('contactus')} active={route().current('contactus')}>
-                                    Contact Us
+                                <NavLink href={route('dashboard')} active={route().current('dashboardd')}>
+                                    Job Listing
+                                </NavLink>
+                                <NavLink href={route('dashboard')} active={route().current('dashboardd')}>
+                                    Pages
+                                </NavLink>
+                                <NavLink href={route('dashboard')} active={route().current('dashboardd')}>
+                                    Blog
+                                </NavLink>
+                                <NavLink href={route('dashboard')} active={route().current('dashboardd')}>
+                                    Contact
                                 </NavLink>
                             </div>
                         </div>
                         <div className="flex" style={{ flexGrow : '2' , justifyContent : 'end'}}>
-                            <div className="hidden sm:flex sm:items-center sm:ms-6">
-                                <NavLink href={route('createVacancy')} active={route().current('createVacancy')}>
-                                  Announce Your Vacancy
-                                </NavLink>
-                            </div>
-                            {user?
                             <div className="hidden sm:flex sm:items-center sm:ms-6">
                                 <div className="ms-3 relative">
                                     <Dropdown>
@@ -70,9 +72,6 @@ export default function Authenticated({ user, header, children }) {
 
                                         <Dropdown.Content>
                                             <Dropdown.Link href={route('profile.edit')}>Profile</Dropdown.Link>
-                                            <Dropdown.Link href={route('userDashboard')} method="get" as="button">
-                                                My Data
-                                            </Dropdown.Link>
                                             <Dropdown.Link href={route('logout')} method="post" as="button">
                                                 Log Out
                                             </Dropdown.Link>
@@ -80,13 +79,7 @@ export default function Authenticated({ user, header, children }) {
                                     </Dropdown>
                                 </div>
                             </div>
-                            : 
-                            <div className="hidden sm:flex sm:items-center sm:ms-6">
-                                <NavLink href={route('login')} active={route().current('login')}>    
-                                    Login    
-                                </NavLink>  
-                            </div>
-                            }
+
                             <div className="-me-2 flex items-center sm:hidden">
                                 <button
                                     onClick={() => setShowingNavigationDropdown((previousState) => !previousState)}
@@ -113,7 +106,7 @@ export default function Authenticated({ user, header, children }) {
                         </div>
                     </div>
                 </div>
-                {user?
+
                 <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'}>
                     <div className="pt-2 pb-3 space-y-1">
                         <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
@@ -135,7 +128,6 @@ export default function Authenticated({ user, header, children }) {
                         </div>
                     </div>
                 </div>
-                : null }
             </nav>
 
             {header && (
