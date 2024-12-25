@@ -213,5 +213,14 @@ Route::get('/dashboard', [DashboardController::class, 'getDashboardStats'])
 // Route to search for job vacancies in the dashboard
 Route::get('/search-vacancies', [JobController::class, 'searchVacancies']); 
 
+// Click the review button in the dashboard then go to the review page
+Route::get('/createReview/{job_id}', function ($job_id) {
+    return Inertia::render('Review/createReview', [
+        'job_id' => $job_id, // Pass job_id to the component
+    ]);
+})->middleware(['auth', 'verified'])->name('createReview');
+Route::post('/addReview', [ReviewController::class, 'create']);
+
+
 require __DIR__.'/auth.php';
 

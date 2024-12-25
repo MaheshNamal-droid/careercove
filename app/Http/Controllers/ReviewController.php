@@ -3,44 +3,49 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\review;
+use App\Models\Review;
 use Auth;
 use Response;
-use Redirect;
-use Inertia\Inertia; 
+use Inertia\Inertia;
 
 class ReviewController extends Controller
 {
-  public function create(Request $request)
-  {
-  
-    $data = ([
-      "user_id"=>auth()->id(),
-      "text"=>$request->text
-  ]);
-  try{
-    $responsedata = review ::create($data);
-    return Response::json($responsedata);
-} catch (\Illuminate\Database\QueryException $exception) {
-    // You can check get the details of the error using `errorInfo`:
-    $errorInfo = $exception->errorInfo;
-    //print_r($errorInfo);
-    return response()->json('Unable to save data, please contact administrator !', 404); 
+    public function create(Request $request)
+    {
+        // Validate the incoming request
+        $validatedData = $request->validate([
+            'text' => 'required|string',
+            'job_id' => 'required|exists:job_vacancy,id',  // Ensure the job_id exists in the jobs table
+        ]);
+
+        // Prepare the review data
+        $data = [
+            'user_id' => auth()->id(),
+            'text' => $request->text,
+            'job_id' => $request->job_id,  // Include the job_id in the review data
+        ];
+
+        try {
+            // Create the review record
+            $review = Review::create($data);
+
+            // Return a success response
+            return response()->json($review, 200);
+
+        } catch (\Exception $e) {
+            // Handle errors
+            return response()->json('Unable to save data, please contact administrator!', 404);
+        }
+    }
+
+    // Method to view the review
+    public function getReview(Request $request)
+    {
+        $review = Review::find($request->id);
+        return Inertia::render('Review/viewReview', [
+            'data' => $review
+        ]);
+    }
 }
-  }
-  // view review
-  public function getReview(Request $request)
-  {
-      $review = review::find($request->id);
-      // return Response::json($review);
-      // return view('viewReview', compact('review'));
-      // return Redirect::route('viewReview')->with( ['data' => $review] );
-      return Inertia::render('Review/viewReview', [
-         'data' => $review
-      ]);
-  }
 
-
-
-}
 ?>

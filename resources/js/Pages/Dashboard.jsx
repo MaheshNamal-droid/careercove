@@ -39,7 +39,7 @@ export default function Dashboard({ auth, candidates, jobsPosted, companies }) {
                                 The Easiest Way To Get Your Dream<br /> Job
                             </h1>
                             <p className="text-1xl text-center">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate est, consequuntur perferendis.
+                                Connecting talent with opportunity - your dream job is just a click away.
                             </p>
                             <div className="flex gap-5 flex-row text-black">
                                 <input
