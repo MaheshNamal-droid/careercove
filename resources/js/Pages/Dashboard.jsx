@@ -30,7 +30,6 @@ export default function Dashboard({ auth, candidates, jobsPosted, companies }) {
     return (
         <AuthenticatedLayout user={auth.user}>
             <Head title="Dashboard" />
-            {showModel && <ModalPromo onClose={() => setShowModel(false)} />}
             <div className="dashboard_top_container">
                 <div className="inset-0 bg-black bg-opacity-50 flex justify-center items-center backdrop-brightness-75">
                     <div className="flex flex-col gap-5 text-white mt-20 mb-20">
@@ -38,9 +37,6 @@ export default function Dashboard({ auth, candidates, jobsPosted, companies }) {
                             <h1 className="text-2xl text-center">
                                 The Easiest Way To Get Your Dream<br /> Job
                             </h1>
-                            <p className="text-1xl text-center">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate est, consequuntur perferendis.
-                            </p>
                             <div className="flex gap-5 flex-row text-black">
                                 <input
                                     type="text"
@@ -85,6 +81,7 @@ export default function Dashboard({ auth, candidates, jobsPosted, companies }) {
                 </div>
             </div>
             <ModelVacancys searchTerm={activeSearchTerm} />
+            {showModel && <ModalPromo onClose={() => setShowModel(false)} />}
             <div className="py-12"></div>
         </AuthenticatedLayout>
     );

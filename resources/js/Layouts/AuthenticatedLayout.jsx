@@ -49,6 +49,7 @@ export default function Authenticated({ user, header, children }) {
                                   Announce Your Vacancy
                                 </NavLink>
                             </div>
+                            {user?
                             <div className="hidden sm:flex sm:items-center sm:ms-6">
                                 <div className="ms-3 relative">
                                     <Dropdown>
@@ -85,7 +86,7 @@ export default function Authenticated({ user, header, children }) {
                                     </Dropdown>
                                 </div>
                             </div>
-
+                            : null }
                             <div className="-me-2 flex items-center sm:hidden">
                                 <button
                                     onClick={() => setShowingNavigationDropdown((previousState) => !previousState)}
@@ -112,7 +113,7 @@ export default function Authenticated({ user, header, children }) {
                         </div>
                     </div>
                 </div>
-
+                {user?
                 <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'}>
                     <div className="pt-2 pb-3 space-y-1">
                         <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
@@ -134,6 +135,7 @@ export default function Authenticated({ user, header, children }) {
                         </div>
                     </div>
                 </div>
+                : null }
             </nav>
 
             {header && (
