@@ -216,9 +216,17 @@ Route::get('/dashboard', [DashboardController::class, 'getDashboardStats'])
 Route::get('/home', [DashboardController::class, 'getDashboardStats'])
     ->withoutMiddleware(['auth', 'verified'])
     ->name('home');
+Route::get('/', [DashboardController::class, 'getDashboardStats'])
+    ->withoutMiddleware(['auth', 'verified'])
+    ->name('home');
 
 // Route to search for job vacancies in the dashboard
 Route::get('/search-vacancies', [JobController::class, 'searchVacancies']); 
+
+// user dashboard
+Route::get('/userDashboard', function () {
+    return Inertia::render('userDashboard/home');
+})->middleware(['auth', 'verified'])->name('userDashboard');
 
 require __DIR__.'/auth.php';
 
