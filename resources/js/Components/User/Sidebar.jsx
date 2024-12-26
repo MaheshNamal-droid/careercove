@@ -14,7 +14,7 @@ const Sidebar = () => {
             <a href="/createUserProfile" className="hover:text-gray-300">Profile</a>
           </li>
           <li className="mb-4">
-            <a href="" className="hover:text-gray-300">My Applications</a>
+            <a href="/userDashboard/getApplications" className="hover:text-gray-300">My Applications</a>
           </li>
           <li className="mb-4">
             <a href="" className="hover:text-gray-300">My Vacancies</a>
