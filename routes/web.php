@@ -236,5 +236,24 @@ Route::get('/userDashboard', function () {
     return Inertia::render('userDashboard/home');
 })->middleware(['auth', 'verified'])->name('userDashboard');
 
+// Route to my posted jobs
+Route::middleware('auth')->group(function () {
+    Route::get('/userDashboard/getMyPostedJobs', [MyPostedJobsController::class, 'getMyPostedJobs'])->name('myPostedJobs');
+});
+
+// Route to display a specific job vacancy by its ID
+Route::middleware('auth')->group(function () {
+    Route::get('/userDashboard/jobVacancy/{id}', [MyPostedJobsController::class, 'show'])->name('jobVacancy.show');
+});
+
+// Route to display the edit form for a specific job vacancy by its ID
+Route::middleware('auth')->group(function () {
+    Route::get('/userDashboard/jobVacancy/{id}/edit', [MyPostedJobsController::class, 'edit'])->name('jobVacancy.edit');
+    Route::put('/userDashboard/jobVacancy/{id}', [MyPostedJobsController::class, 'update'])->name('jobVacancy.update');
+});
+
+// Route to delete a specific job vacancy by its ID
+Route::get('/userDashboard/jobVacancy/{id}/delete', [MyPostedJobsController::class, 'delete'])->name('jobVacancy.delete');
+
 require __DIR__.'/auth.php';
 
