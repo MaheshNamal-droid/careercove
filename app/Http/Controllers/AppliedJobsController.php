@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\job_vacancy;
 use App\Models\applications;
 use App\Models\user_profile;
-
+use Illuminate\Support\Facades\DB;
 use Auth;
 use Response;
 use Redirect;
@@ -34,6 +34,17 @@ class AppliedJobsController extends Controller
 
       // Return the view with job vacancy details
       return view('AppliedJobs.show', compact('job_vacancy'));
+   }
+   
+   public function getApplications(){
+     
+    //  $applications = applications::where('status', 1)->paginate(10);
+        $applications = applications::join('job_vacancy', 'application.job_id', '=', 'job_vacancy.id')
+        ->join('users', 'application.user_id', '=', 'users.id')
+        ->paginate($perPage = 10, $columns = ['application.*','job_vacancy.title', 'users.name']);
+
+     return Inertia::render('userDashboard/myApplications', ['posts' => $applications]);
+
    }
 
 }
