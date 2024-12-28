@@ -90,12 +90,12 @@ function ModelVacancys({ searchTerm }) {
                                             />
                                         </div>
                                     </div>
-                                    <div className="w-1/4 flex flex-col pt-2">
-                                        <p style={{ fontSize: 17, color: 'black' }}>{job.title}</p>
-                                        <p style={{ fontSize: 13, color: 'black' }}>{job.company_name}</p>
+                                    <div className="w-1/4 flex flex-col pt-2 fo">
+                                        <p style={{ fontSize: 17, color: 'black', fontWeight: 'bold' }}>{job.title}</p>
+                                        <p style={{ fontSize: 14, color: 'black' }}>{job.company_name}</p>
                                     </div>
                                     <div className="w-1/4 inline-flex items-center">
-                                        <p style={{ fontSize: 14, color: 'black' }}>{job.city}</p>
+                                        <p style={{ fontSize: 16, color: 'black' }}>{job.location}</p>
                                     </div>
                                     <div className="w-1/4 inline-flex items-center">
                                         <p style={{ fontSize: 14, color: 'black' }}>{job.full_or_part_time}</p>

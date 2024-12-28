@@ -3,6 +3,7 @@ import { Head } from '@inertiajs/react';
 import React, { useState } from 'react';
 import Modal from '../../Components/ModelSuccess';
 import moment from 'moment';
+import { ArrowLeft } from 'lucide-react';
 
 
 
@@ -58,6 +59,14 @@ export default function viewVacancy({ data, auth }) {
             {showModel && <Modal onClose={() => setShowModel(false)} responsemsg={responsemsg} responsestatus={responsestatus} userprofilestatus={userprofilestatus} />}
             <div className="py-12 bg-gray-700">
                 <main class="main bg-white px-6 md:px-16 py-6 mt-5">
+
+                <button  //Back button
+            onClick={() => (window.location.href = '/')} 
+            className="absolute top-20 right-6 flex items-center px-2 py-2 text-sm font-bold text-white bg-gray-500 rounded-sm hover:bg-gray-700"
+        >
+            <ArrowLeft className="w-5 h-5 mr-2" />
+            Back
+        </button>
                     <div class="flex flex-wrap justify-between max-w-6xl mx-auto">
                         <div class="job-post w-full md:w-12/12">
                             <div class="job-meta mb-4">

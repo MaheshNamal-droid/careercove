@@ -3,6 +3,7 @@ import { Head } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 import ModelVacancys from '../Components/ModelVacancys';
 import ModalPromo from '../Components/ModelPromotions';
+import Footer from '../Components/Footer';
 
 export default function Dashboard({ auth, candidates, jobsPosted, companies }) {
 
@@ -83,6 +84,9 @@ export default function Dashboard({ auth, candidates, jobsPosted, companies }) {
             <ModelVacancys searchTerm={activeSearchTerm} />
             {showModel && <ModalPromo onClose={() => setShowModel(false)} />}
             <div className="py-12"></div>
+
+            {/* Footer */}
+            <Footer />
         </AuthenticatedLayout>
     );
 }
