@@ -230,7 +230,9 @@ Route::get('/createReview/{job_id}', function ($job_id) {
         'job_id' => $job_id, // Pass job_id to the component
     ]);
 })->middleware(['auth', 'verified'])->name('createReview');
+
 Route::post('/addReview', [ReviewController::class, 'create']);
+Route::get('/getReviews/{id}', [ReviewController::class, 'getReviewByid']);
 
 // user dashboard
 Route::get('/userDashboard', function () {

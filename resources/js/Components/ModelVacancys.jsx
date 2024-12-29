@@ -1,8 +1,25 @@
 import { useEffect, useState } from 'react';
-
+import moment from 'moment';
+import { Eye } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
+import Collapsible from 'react-collapsible';
 function ModelVacancys({ searchTerm }) {
     const [jobdata, setData] = useState([]);
     const [request_page, setRequestPage] = useState(0);
+
+    const getRevews = async (id) => {
+        const url = `/getReviews/${id}`;
+        try {
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error(`Response status: ${response.status}`);
+            }
+            const json = await response.json();
+            return json;
+        } catch (error) {
+            console.error(error.message);
+        }
+    };
 
     // Load job vacancies
     const loadVacancies = async () => {
@@ -23,12 +40,17 @@ function ModelVacancys({ searchTerm }) {
     // Load more vacancies when scrolled to the end
     useEffect(() => {
         //loadVacancies();
+        // console.log('Hi ')
         window.onscroll = function () {
             if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
                 loadVacancies();
             }
         };
     }, [jobdata, request_page]);
+
+    useEffect(() => {
+        loadVacancies();
+    }, []);
 
     // Filter jobs by search term
     const filteredJobs = searchTerm
@@ -64,7 +86,7 @@ function ModelVacancys({ searchTerm }) {
     };
 
     // Navigate to review form with job_id
-       const navigateToReviewForm = (jobId) => {
+    const navigateToReviewForm = (jobId) => {
         window.location.href = `/createReview/${jobId}`;
     };
 
@@ -75,44 +97,74 @@ function ModelVacancys({ searchTerm }) {
                     <div className="p-10 text-gray-900">
                         {filteredJobs.length > 0 ? (
                             filteredJobs.map((job) => (
-                                <div
-                                    key={job.id}
-                                    className="flex flex-row mb-2 border-solid border rounded-sm hover:bg-gray-100"
-                                    onClick={() => viewVacancy(job.id)}
-                                    style={{ color: '#edeaea4a' }}
-                                >
-                                    <div className="w-1/4 p-2">
-                                        <div className="size-16 place-content-center ml-10">
-                                            <img
-                                                src={`../../files/${job.company_logo}`}
-                                                className="object-scale-down w-96"
-                                                alt="company-logo"
-                                            />
+                                <div className='w-full flex flex-col border-solid border rounded-sm hover:bg-gray-100'>
+                                    <div
+                                        key={job.id}
+                                        className="flex flex-row mb-2"
+                                        onClick={() => viewVacancy(job.id)}
+                                        style={{ color: '#edeaea4a' }}
+                                    >
+                                        <div className="w-1/4 p-2">
+                                            <div className="size-16 place-content-center ml-10">
+                                                <img
+                                                    src={`../../files/${job.company_logo}`}
+                                                    className="object-scale-down w-96"
+                                                    alt="company-logo"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="w-1/4 flex flex-col pt-3 fo">
+                                            <p style={{ fontSize: 17, color: 'black', fontWeight: 'bold' }}>{job.title}</p>
+                                            <p style={{ fontSize: 14, color: 'black' }}>{job.company_name}</p>
+                                        </div>
+
+                                        <div className="w-1/4 flex items-center flex-col pt-4">
+                                            <p className='text-center text-black w-full text-sm'>Closing Date</p>
+                                            <p className='text-center text-gray-500 w-full'>{job.closing_date}</p>
+                                        </div>
+                                        <div className="w-1/4 inline-flex items-center">
+                                            <p style={{ fontSize: 14, color: 'black' }}>{job.full_or_part_time}</p>
+                                        </div>
+                                        <div className="w-1/4 flex flex-col items-left pt-3 fo gap-2">
+                                            <span class="text-xs text-lime-500">
+                                                Posted<span> </span>
+                                                {moment.utc(job.created_at).local().startOf('seconds').fromNow()}
+                                            </span>
+                                            <div className='flex flex-row gap-2 w-full'>
+                                                <span className='text-xs text-orange-500'>  <Eye size={16} /> </span>
+                                                <span className='text-xs text-orange-500'>  {job.view_count}</span>
+                                            </div>
+                                            <div className='flex flex-row gap-2 w-full'>
+                                                <button
+                                                    onClick={(e) => {
+                                                        e.stopPropagation(); // Prevent triggering the parent div onClick
+                                                        navigateToReviewForm(job.id);
+                                                    }}
+                                                    className="rounded px-4 py-2 text-xs bg-blue-500 text-blue-100 hover:bg-blue-600 duration-300"
+                                                >
+                                                    Add Review
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div className="w-1/4 flex flex-col pt-2 fo">
-                                        <p style={{ fontSize: 17, color: 'black', fontWeight: 'bold' }}>{job.title}</p>
-                                        <p style={{ fontSize: 14, color: 'black' }}>{job.company_name}</p>
-                                    </div>
-                                    <div className="w-1/4 inline-flex items-center">
-                                        <p style={{ fontSize: 16, color: 'black' }}>{job.location}</p>
-                                    </div>
-                                    <div className="w-1/4 inline-flex items-center">
-                                        <p style={{ fontSize: 14, color: 'black' }}>{job.full_or_part_time}</p>
-                                    </div>
-
-                                    <div className="w-1/4 inline-flex items-center">
-                                        <button
-                                            onClick={(e) => {
-                                                e.stopPropagation(); // Prevent triggering the parent div onClick
-                                                navigateToReviewForm(job.id);
-                                            }}
-                                            className="ml-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-                                        >
-                                            Review
-                                        </button>
-                                    </div>
-
+                                    {/* <div>
+                                        <div className="w-full flex flex-col fo gap-2">
+                                            <Collapsible trigger={["",
+                                                <button className='text-s text-lime-500' onClick={() => getRevews(job.id)}>Reviews <ChevronDown size={16} /> </button>
+                                            ]}>
+                                                <div className="w-full">
+                                                    <p>
+                                                        This is the collapsible content. It can be any element or React
+                                                        component you like.
+                                                    </p>
+                                                    <p>
+                                                        It can even be another Collapsible component. Check out the next
+                                                        section!
+                                                    </p>
+                                                </div>
+                                            </Collapsible>
+                                        </div>
+                                    </div> */}
                                 </div>
                             ))
                         ) : (

@@ -36,7 +36,7 @@ export default function Dashboard({ auth, candidates, jobsPosted, companies }) {
                     <div className="flex flex-col gap-5 text-white mt-20 mb-20">
                         <div className="px-20 py-10 flex flex-col gap-5 items-center">
                             <h1 className="text-2xl text-center">
-                                The Easiest Way To Get Your Dream<br /> Job
+                                The Easiest Way To Get Your Dream Job
                             </h1>
                             <div className="flex gap-5 flex-row text-black">
                                 <input

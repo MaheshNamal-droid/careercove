@@ -46,6 +46,12 @@ class ReviewController extends Controller
             'data' => $review
         ]);
     }
+
+    public function getReviewByid(Request $request)
+    {
+        $review = Review::where('job_id', $request->id)->get();
+        return Response::json($review);
+    }
 }
 
 ?>
