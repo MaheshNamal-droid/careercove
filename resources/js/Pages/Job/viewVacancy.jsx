@@ -12,9 +12,20 @@ export default function viewVacancy({ data, auth }) {
     const [responsemsg, setResponsemsg] = useState(false);
     const [responsestatus, setresponsestatus] = useState(false);
     const [userprofilestatus, setuserprofilestatus] = useState(false);
+    const [loginStatus, setLoginStatus] = useState(false);
+
+    console.log(auth.user);
     const handleApply = async (e) => {
         e.preventDefault();
-
+        // check if user has a logged in 
+        if(!auth.user){
+                setResponsemsg("You need to login to apply vacancy.");
+                setLoginStatus(false);
+                setShowModel(true);
+            return false;
+        }else{
+            setLoginStatus(true);
+        }
         // Create FormData object to send form data and file
         const form_data = new FormData();
         form_data.append('jobid', data.id);
@@ -29,7 +40,7 @@ export default function viewVacancy({ data, auth }) {
             });
 
             if (response.ok) {
-                // alert('Applyed successfully!');
+                console.log(response.status);
                 setResponsemsg("Your application has been submitted successfully!");
                 setShowModel(true);
                 setresponsestatus(true);
@@ -56,7 +67,7 @@ export default function viewVacancy({ data, auth }) {
         // header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">View Vacancy{data.id}</h2>}
         >
             <Head title="Dashboard" />
-            {showModel && <Modal onClose={() => setShowModel(false)} responsemsg={responsemsg} responsestatus={responsestatus} userprofilestatus={userprofilestatus} />}
+            {showModel && <Modal onClose={() => setShowModel(false)} responsemsg={responsemsg} responsestatus={responsestatus} userprofilestatus={userprofilestatus} loginStatus={loginStatus} />}
             <div className="py-12 bg-gray-700">
                 <main class="main bg-white px-6 md:px-16 py-6 mt-5">
 
@@ -90,7 +101,7 @@ export default function viewVacancy({ data, auth }) {
                                 {data.requirement}
                             </p>
                         </div>
-                        <div class="job-description mb-4">
+                        <div class="job-description mb-4 w-full">
                             <h3 class="text-xl">Description</h3>
                             <p class="mb-2">
                                 {data.description}

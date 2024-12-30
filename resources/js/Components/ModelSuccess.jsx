@@ -4,7 +4,7 @@ import { X } from 'lucide-react';
 import { PartyPopper } from 'lucide-react';
 import { ShieldAlert } from 'lucide-react';
 
-function ModelSuccess({onClose,responsemsg,responsestatus,userprofilestatus}) {
+function ModelSuccess({onClose,responsemsg,responsestatus,userprofilestatus,loginStatus}) {
   const ModelRef=useRef();
 
   const colseModel=(e)=>{
@@ -23,7 +23,10 @@ function ModelSuccess({onClose,responsemsg,responsestatus,userprofilestatus}) {
             :
                 <> <ShieldAlert size={100} /><h1 className='text-2xl text-red-600'>{responsemsg}</h1><a href='/dashboard' className='text-blue-600'><h1 className='text-1xl'>Home</h1></a></>
             }
+
             {!userprofilestatus && <a href='/createUserProfile' className='text-blue-600'><h1 className='text-1xl'>Create Profile</h1></a>}
+
+            {!loginStatus && <a href='/login' className='text-blue-600'><h1 className='text-1xl'>Login</h1></a>}
             </div>
         </div>
     </div>
