@@ -84,7 +84,65 @@ function ModelVacancys({ searchTerm }) {
             console.error('Error incrementing view count:', error);
         }
     };
+    // submit review
+    const submitReview = async (id, text) => {
+        // Create FormData object to send form data and file
+        const data = new FormData();
+        data.append('text', text);
+        data.append('job_id', id);  // Add job_id to the data
+        try {
+            const response = await fetch('/addReview', {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': document.head.querySelector('meta[name="csrf-token"]')?.getAttribute('content'),
+                },
+                body: data,
+            });
 
+            if (response.ok) {
+                alert('Review added successfully!');
+            } else {
+                alert('Failed to add review.');
+            }
+        } catch (error) {
+            console.error('Error adding review:', error);
+        }
+    }
+    // toggel rewiews
+    const toggleRewiew = (e, id) => {
+        let rewiews = e.target.parentElement.parentElement.children[1];
+        rewiews.style.display = rewiews.style.display === 'none' ? 'block' : 'none';
+        rewiews.innerHTML = "";
+        let reviews = getRevews(id);
+
+        // Create a new input element for add reviews
+        var newreview = document.createElement("textarea");
+        newreview.className = "w-full text-slate-600 bg-white border border-slate-300 appearance-none rounded-lg px-3.5 py-2.5 outline-none focus:bg-white focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100";
+        newreview.placeholder = "Write your review here...";
+        rewiews.appendChild(newreview);
+        // Create a new button element for add reviews
+        var newreviewbtn = document.createElement("button");
+        newreviewbtn.className = "rounded px-4 py-2 text-xs bg-blue-500 text-blue-100 hover:bg-blue-600 duration-300";
+        newreviewbtn.textContent = "Post Review";
+        newreviewbtn.addEventListener("click", () => {
+            submitReview(id, newreview.value);
+        })
+        rewiews.appendChild(newreviewbtn);
+
+        reviews.then((result) => {
+            result.forEach((review) => {
+                var rewiewuser = document.createElement("div");
+                rewiewuser.className = "px-4 py-2 text-xs font-semibold underline";
+                rewiewuser.textContent = review.name + " - " + review.created_at;
+                rewiews.appendChild(rewiewuser);
+
+                var reviewselement = document.createElement("div");
+                reviewselement.className = "px-4 py-2 text-xs";
+                reviewselement.textContent = review.text;
+                rewiews.appendChild(reviewselement);
+            })
+        })
+    }
     // Navigate to review form with job_id
     const navigateToReviewForm = (jobId) => {
         window.location.href = `/createReview/${jobId}`;
@@ -100,7 +158,7 @@ function ModelVacancys({ searchTerm }) {
                                 <div className='w-full flex flex-col border-solid border rounded-sm hover:bg-gray-100'>
                                     <div
                                         key={job.id}
-                                        className="flex flex-row mb-2"
+                                        className="flex flex-row"
                                         onClick={() => viewVacancy(job.id)}
                                         style={{ color: '#edeaea4a' }}
                                     >
@@ -135,36 +193,19 @@ function ModelVacancys({ searchTerm }) {
                                                 <span className='text-xs text-orange-500'>  {job.view_count}</span>
                                             </div>
                                             <div className='flex flex-row gap-2 w-full'>
-                                                <button
-                                                    onClick={(e) => {
-                                                        e.stopPropagation(); // Prevent triggering the parent div onClick
-                                                        navigateToReviewForm(job.id);
-                                                    }}
-                                                    className="rounded px-4 py-2 text-xs bg-blue-500 text-blue-100 hover:bg-blue-600 duration-300"
-                                                >
-                                                    Add Review
-                                                </button>
+
                                             </div>
                                         </div>
                                     </div>
-                                    {/* <div>
-                                        <div className="w-full flex flex-col fo gap-2">
-                                            <Collapsible trigger={["",
-                                                <button className='text-s text-lime-500' onClick={() => getRevews(job.id)}>Reviews <ChevronDown size={16} /> </button>
-                                            ]}>
-                                                <div className="w-full">
-                                                    <p>
-                                                        This is the collapsible content. It can be any element or React
-                                                        component you like.
-                                                    </p>
-                                                    <p>
-                                                        It can even be another Collapsible component. Check out the next
-                                                        section!
-                                                    </p>
-                                                </div>
-                                            </Collapsible>
+                                    <div className='w-full flex flex-col fo gap-2'>
+                                     
+                                        <div className='flex flex-row gap-2 w-1/4 p-2' onClick = {(e) => toggleRewiew(e, job.id)}>
+                                            <span className='ml-5 inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150'> Reviews <ChevronDown size={16} align="center"/></span>
                                         </div>
-                                    </div> */}
+                                        <div className='w-full flex flex-col fo gap-2 p-5' style={{ display: 'none' }} >
+
+                                        </div>
+                                    </div>
                                 </div>
                             ))
                         ) : (

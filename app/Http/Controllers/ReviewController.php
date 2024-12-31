@@ -49,9 +49,14 @@ class ReviewController extends Controller
 
     public function getReviewByid(Request $request)
     {
-        $review = Review::where('job_id', $request->id)->get();
+       // $review = Review::where('job_id', $request->id)->get();
+        $review = Review :: join('users', 'review.user_id', '=', 'users.id')->where('job_id', $request->id)->get();
         return Response::json($review);
     }
 }
+
+// $applications = applications::join('job_vacancy', 'application.job_id', '=', 'job_vacancy.id')
+// ->join('users', 'application.user_id', '=', 'users.id')
+// ->paginate($perPage = 10, $columns = ['application.*','job_vacancy.title', 'users.name']);
 
 ?>
