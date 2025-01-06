@@ -2,12 +2,15 @@ import { useEffect, useState } from 'react';
 import moment from 'moment';
 import { Eye } from 'lucide-react';
 import { ChevronDown } from 'lucide-react';
-import Collapsible from 'react-collapsible';
 function ModelVacancys({ searchTerm }) {
     const [jobdata, setData] = useState([]);
     const [request_page, setRequestPage] = useState(0);
 
-    const getRevews = async (id) => {
+    // get reviews by job id
+    const getRevews = async (id, e) => {
+        let parent = e.target.parentElement.parentElement.children[2];
+        //parent.appendChild(Pagination);
+
         const url = `/getReviews/${id}`;
         try {
             const response = await fetch(url);
@@ -113,7 +116,7 @@ function ModelVacancys({ searchTerm }) {
         let rewiews = e.target.parentElement.parentElement.children[1];
         rewiews.style.display = rewiews.style.display === 'none' ? 'block' : 'none';
         rewiews.innerHTML = "";
-        let reviews = getRevews(id);
+        let reviews = getRevews(id, e);
 
         // Create a new input element for add reviews
         var newreview = document.createElement("textarea");
@@ -198,13 +201,15 @@ function ModelVacancys({ searchTerm }) {
                                         </div>
                                     </div>
                                     <div className='w-full flex flex-col fo gap-2'>
-                                     
-                                        <div className='flex flex-row gap-2 w-1/4 p-2' onClick = {(e) => toggleRewiew(e, job.id)}>
-                                            <span className='ml-5 inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150'> Reviews <ChevronDown size={16} align="center"/></span>
+
+                                        <div className='flex flex-row gap-2 w-1/4 p-2' onClick={(e) => toggleRewiew(e, job.id)}>
+                                            <span className='ml-5 inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150'> Reviews <ChevronDown size={16} align="center" /></span>
                                         </div>
                                         <div className='w-full flex flex-col fo gap-2 p-5' style={{ display: 'none' }} >
 
                                         </div>
+                                        <div class="w-12 h-12 rounded-full animate-spin
+                    border-2 border-solid border-blue-500 border-t-transparent"></div>
                                     </div>
                                 </div>
                             ))
