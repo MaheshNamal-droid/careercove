@@ -5,6 +5,7 @@ use Illuminate\View\View;
 use Illuminate\Http\Request;
 use App\Models\job_vacancy;
 use App\Models\user_profile;
+use App\Models\job_category;
 
 use Auth;
 use Response;
@@ -101,15 +102,18 @@ class MyPostedJobsController extends Controller
 
     public function edit($id)
     {
+        $categorys = job_category::all();
         $jobVacancy = job_vacancy::findOrFail($id); // Find the job by ID or throw a 404 error
-        return Inertia::render('userDashboard/EditJobVacancy', ['jobVacancy' => $jobVacancy]); // Pass data to Inertia
+        return Inertia::render('userDashboard/EditJobVacancy', ['jobVacancy' => $jobVacancy,'cat_data' => $categorys]); // Pass data to Inertia
     }
+
 
     public function update(Request $request, $id)
     {
         $jobVacancy = job_vacancy::findOrFail($id); // Find the job by ID
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
+            'job_category' => 'required|integer',
             'description' => 'required|string',
             'requirement' => 'required|string',
             'location' => 'required|string|max:255',
@@ -122,7 +126,7 @@ class MyPostedJobsController extends Controller
 
         $jobVacancy->update($validatedData); // Update the job vacancy data
 
-        return redirect()->route('myPostedJobs')->with('success', 'Job vacancy updated successfully.');
+        // return redirect()->route('myPostedJobs')->with('success', 'Job vacancy updated successfully.');
     }
 
 

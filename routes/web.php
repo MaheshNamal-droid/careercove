@@ -11,6 +11,7 @@ use App\Http\Controllers\MyPostedJobsController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\AppliedJobsController;
+use App\Http\Controllers\UsereDashboardController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -105,9 +106,12 @@ Route::get('/manageJobVacancies', [JobController::class, 'index'])->name('manage
 Route::get('/JobVacancy/{id}', [JobController::class, 'show'])->name('JobVacancy.show');
 
 // job vacancy routes
-Route::get('/createVacancy', function () {
-    return Inertia::render('Job/createVacancy');
-})->middleware(['auth', 'verified'])->name('createVacancy');
+// Route::get('/createVacancy', function () {
+//     //return Inertia::render('Job/createVacancy');
+// })->middleware(['auth', 'verified'])->name('createVacancy');
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/createVacancy', [JobController::class, 'createVacancy'])->name('createVacancy');
+});
 
 Route::middleware('auth')->group(function () {
     Route::post('/addVacancy', [JobController::class, 'create']);
@@ -235,9 +239,12 @@ Route::post('/addReview', [ReviewController::class, 'create']);
 Route::get('/getReviews/{id}', [ReviewController::class, 'getReviewByid']);
 
 // user dashboard
-Route::get('/userDashboard', function () {
-    return Inertia::render('userDashboard/home');
-})->middleware(['auth', 'verified'])->name('userDashboard');
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/userDashboard', [UsereDashboardController::class, 'home'])->name('userDashboard');
+});
+// Route::get('/userDashboard', function () {
+//     return Inertia::render('userDashboard/home');
+// })->middleware(['auth', 'verified'])->name('userDashboard');
 
 // Route to my posted jobs
 Route::middleware('auth')->group(function () {

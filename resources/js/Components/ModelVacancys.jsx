@@ -208,8 +208,8 @@ function ModelVacancys({ searchTerm }) {
                                         <div className='w-full flex flex-col fo gap-2 p-5' style={{ display: 'none' }} >
 
                                         </div>
-                                        <div class="w-12 h-12 rounded-full animate-spin
-                    border-2 border-solid border-blue-500 border-t-transparent"></div>
+                                        {/* <div class="w-12 h-12 rounded-full animate-spin
+                    border-2 border-solid border-blue-500 border-t-transparent"></div> */}
                                     </div>
                                 </div>
                             ))

@@ -5,10 +5,10 @@ import AdministratorLayout from '@/Layouts/UserDashboardLayout';
 import Sidebar from '../../Components/User/Sidebar';
 import { ArrowLeft } from 'lucide-react';
 
-export default function EditJobVacancy({ jobVacancy, auth}) {
-
+export default function EditJobVacancy({ jobVacancy,cat_data, auth}) {
     const { data, setData, put, processing, errors } = useForm({
         title: jobVacancy.title || "",
+        job_category: jobVacancy.job_category || "",
         description: jobVacancy.description || "",
         requirement: jobVacancy.requirement || "",
         location: jobVacancy.location || "",
@@ -50,6 +50,22 @@ export default function EditJobVacancy({ jobVacancy, auth}) {
                                             className="block w-full border rounded px-3 py-2"
                                         />
                                         {errors.title && <span className="text-red-500">{errors.title}</span>}
+                                    </label>
+                                    <label className="block">
+                                        Category:
+                                        <select
+                                            value={data.job_category}
+                                            onChange={(e) => setData("job_category", e.target.value)}
+                                            id="job_category"
+                                            name="job_category"
+                                            required
+                                            className="w-full px-4 py-2 border border-gray-500 rounded-md focus:outline-none focus:border-indigo-500"
+                                            >
+                                            <option >Select a category</option>
+                                            {cat_data.map((item) => (
+                                                <option value={item.id}>{item.title}</option>
+                                            ))}
+                                        </select>
                                     </label>
                                     <label className="block">
                                         Description:

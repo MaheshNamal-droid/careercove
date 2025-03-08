@@ -3,10 +3,11 @@ import { Head } from '@inertiajs/react';
 import React, { useState } from 'react';
 
 
-export default function createVacancy({ auth }) {
+export default function createVacancy({data,auth }) {
   // Define form state
   const [formData, setFormData] = useState({
     title: '',
+    category: '',
     description: '',
     requirement: '',
     location: '',
@@ -21,7 +22,11 @@ export default function createVacancy({ auth }) {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+    
   };
+  const getCategory = (e) => {
+    setFormData({ ...formData, category: e.target.value });
+  }
     // Handle file selection
     const handleFileChange = (e) => {
         setFormData({ ...formData, file: e.target.files[0] });
@@ -32,10 +37,14 @@ export default function createVacancy({ auth }) {
 // Handle form submission
 const handleSubmit = async (e) => {
     e.preventDefault();
-
+    // let job_category = document.getElementById('category').value;
+    // var e = document.getElementById("job_category");
+    // var c_value = e.options[e.selectedIndex].value;
+    // setFormData({ ...formData, category: c_value });
     // Create FormData object to send form data and file
     const data = new FormData();
     data.append('title', formData.title);
+    data.append('category', formData.category);
     data.append('description', formData.description);
     data.append('requirement', formData.requirement);
     data.append('closing_date', formData.closing_date);
@@ -91,6 +100,21 @@ const handleSubmit = async (e) => {
                                 required
                                 className="w-full px-4 py-2 border border-gray-500 rounded-md focus:outline-none focus:border-indigo-500"
                                 />
+                            </div>
+                            <div>
+                                <label className="block text-gray-700 font-semibold mb-2">Category:</label>
+                                <select
+                                id="job_category"
+                                name="category"
+                                onChange={getCategory}
+                                required
+                                className="w-full px-4 py-2 border border-gray-500 rounded-md focus:outline-none focus:border-indigo-500"
+                                >
+                                <option >Select a category</option>
+                                {data.map((item) => (
+                                    <option value={item.id}>{item.title}</option>
+                                ))}
+                                </select>
                             </div>
                             <div>
                                 <label className="block text-gray-700 font-semibold mb-2">Description:</label>

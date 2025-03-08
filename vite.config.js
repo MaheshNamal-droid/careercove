@@ -10,4 +10,10 @@ export default defineConfig({
         }),
         react(),
     ],
+    server: {
+        cors: {
+          origin: '*',  // Allow all origins (or specify your frontend URL)
+          methods: ['GET', 'POST', 'PUT', 'DELETE'],
+        }
+      }
 });

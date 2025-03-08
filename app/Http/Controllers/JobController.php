@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use App\Models\job_vacancy;
+use App\Models\job_category;
 use App\Models\applications;
 use App\Models\user_profile;
 use Illuminate\Http\RedirectResponse;
@@ -15,6 +16,14 @@ use Inertia\Inertia;
 
 class JobController extends Controller
 {
+    public function createVacancy(Request $request)
+    {
+        $categorys = job_category::all();
+        return Inertia::render('Job/createVacancy', [
+           'data' => $categorys
+        ]);
+        //return Inertia::render('Job/createVacancy');
+    }
     public function create(Request $request)
     {
         // variable declaration
@@ -42,6 +51,7 @@ class JobController extends Controller
         $data = ([
             "user_id"=>auth()->id(),
             "title"=>$request->title,
+            "job_category"=>$request->category,
             "description"=>$request->description,
             "requirement"=>$request->requirement,
             "location"=>$request->location,
