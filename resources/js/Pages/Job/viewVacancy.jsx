@@ -119,7 +119,7 @@ export default function viewVacancy({ data, auth }) {
                                         </h1>
                                         <span class="text-s">Email : {data.contact_email}</span>
                                         <span class="text-s ml-4">Phone : {data.contact_phone}</span>
-                                        <span class="text-s ml-4"><a href={data.location} target="_blank" class="text-blue-500">View Location</a></span>
+                                        <span class="text-s ml-4">Location :{data.location}</span>
                                     </div>
                                 </div>
                                 <a onClick={handleApply}

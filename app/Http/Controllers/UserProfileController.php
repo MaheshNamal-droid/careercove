@@ -73,14 +73,72 @@ public function initiateScroll(Request $request)
 }
 
 // view user profile
-public function getUserProfile(Request $request)
+public function getUserProfile()
 {
-    $user_profile = user_profile::find($request->id);
-   // return Response::json($user_profile);
-    // return view('viewUserProfile', compact('user_profile'));
-    // return Redirect::route('viewUserProfile')->with( ['data' => $user_profile] );
-    return Inertia::render('UserProfile/viewUserProfile', [
-       'data' => $user_profile
+    $user_profile = user_profile::where('user_id', auth()->id())->first();
+
+    return Inertia::render('UserProfile/ViewUserProfile', [
+        'user_profile' => $user_profile,
     ]);
+}
+
+// edit user profile
+public function edit($id)
+{
+    $user_profile = user_profile::findOrFail($id);
+    return Inertia::render('UserProfile/EditUserProfile', ['user_profile' => $user_profile]);
+}
+
+// update user profile
+public function update(Request $request, $id)
+{
+    $user_profile = user_profile::findOrFail($id);
+
+    // Handle Profile Picture
+    if ($request->hasFile('profile_picture')) {
+        $profile_picture = $request->file('profile_picture');
+        $profile_picture_name = time() . '_' . $profile_picture->getClientOriginalName();
+        $profile_picture->move(public_path('files'), $profile_picture_name);
+
+        // Delete old profile picture
+        if ($user_profile->profile_picture) {
+            $oldProfilePath = public_path('files/' . $user_profile->profile_picture);
+            if (file_exists($oldProfilePath)) {
+                unlink($oldProfilePath);
+            }
+        }
+
+        $user_profile->profile_picture = $profile_picture_name;
+    }
+
+    // Handle Resume
+    if ($request->hasFile('resume')) {
+        $resume = $request->file('resume');
+        $resume_name = time() . '_' . $resume->getClientOriginalName();
+        $resume->move(public_path('files'), $resume_name);
+
+        // Delete old resume
+        if ($user_profile->resume) {
+            $oldResumePath = public_path('files/' . $user_profile->resume);
+            if (file_exists($oldResumePath)) {
+                unlink($oldResumePath);
+            }
+        }
+
+        $user_profile->resume = $resume_name;
+    }
+
+    // Update other fields
+    $user_profile->update([
+        'first_name' => $request->first_name,
+        'last_name' => $request->last_name,
+        'email' => $request->email,
+        'address' => $request->address,
+        'contact_phone' => $request->contact_phone,
+        'social_media' => $request->social_media,
+        'description' => $request->description,
+    ]);
+
+    return redirect()->route('userProfile')->with('success', 'Profile updated successfully.');
 }
 }

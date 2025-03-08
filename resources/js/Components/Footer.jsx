@@ -4,17 +4,17 @@ import { Facebook, Twitter, Instagram, Linkedin, MapPin, Phone, Mail } from "luc
 export default function Footer() {
   return (
     <footer className="bg-[#3C3D37] text-white py-10">
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-28 px-5">
+      <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-28 px-5">
         {/* About Section */}
         <div>
-          <h2 className="text-2xl font-bold mb-4 text-lime-500">Ready to Shape Your Future?</h2>
-          <h3 className="text-xl font-bold mb-4 text-lime-500">CareerCove</h3>
-          <p className="text-sm">
+          <h2 className="text-2xl font-bold mb-4 text-lime-500 px-5">Ready to Shape Your Future?</h2>
+          <h3 className="text-xl font-bold mb-4 text-lime-500 px-5">CareerCove</h3>
+          <p className="text-sm px-5">
             Your gateway to career success. Explore the best opportunities and
             find your dream job effortlessly with CareerCove.
           </p>
-          <h4 className="text-xl font-bold mb-4 mt-4 text-lime-500">Follow Us</h4>
-          <div className="flex gap-4 mt-4">
+          <h4 className="text-xl font-bold mb-4 mt-4 text-lime-500 px-5">Follow Us</h4>
+          <div className="flex gap-4 mt-4 px-5">
             <a
               href="https://www.facebook.com" target="_blank"
               className="flex items-center justify-center w-10 h-10 rounded-full bg-lime-500 text-white hover:bg-white hover:text-lime-500 transition-all duration-300"
@@ -45,8 +45,8 @@ export default function Footer() {
 
         {/* Quick Links */}
         <div>
-          <h3 className="text-xl font-bold mb-4 text-lime-500">Quick Links</h3>
-          <ul className="space-y-4">
+          <h3 className="text-xl font-bold mb-4 text-lime-500 px-28">Quick Links</h3>
+          <ul className="space-y-4 px-28">
             <li>
               <a href="/about" className="hover:text-lime-500">
                 About Us
@@ -70,23 +70,10 @@ export default function Footer() {
           </ul>
         </div>
 
-        {/* Job Categories */}
-        <div>
-          <h3 className="text-xl font-bold mb-4 text-lime-500">Job Categories</h3>
-          <ul className="space-y-4">
-
-            <li><a>Technology</a></li>
-            <li><a>Design</a></li>
-            <li><a>Marketing</a></li>
-            <li><a>Finance</a></li>
-
-          </ul>
-        </div>
-
         {/* Contact Info */}
         <div>
-          <h3 className="text-xl font-bold mb-4 text-lime-500">Contact Us</h3>
-          <ul className="space-y-4">
+          <h3 className="text-xl font-bold mb-4 text-lime-500 px-16">Contact Us</h3>
+          <ul className="space-y-4 px-16">
             <li className="flex items-center gap-3">
               <MapPin size={20} className="text-lime-500" />
               <span>123, Main Street, Kandy</span>

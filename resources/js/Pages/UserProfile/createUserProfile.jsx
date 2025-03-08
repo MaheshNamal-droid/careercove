@@ -2,9 +2,10 @@ import UserDashboardLayout from '@/Layouts/UserDashboardLayout';
 import { Head } from '@inertiajs/react';
 import React, { useState } from 'react';
 import Sidebar from '../../Components/User/Sidebar';
+import { ArrowLeft } from 'lucide-react';
 
 export default function CreateUserProfile({ auth }) {
-  // Define form state
+  // State to store form data
   const [formData, setFormData] = useState({
     first_name: '',
     last_name: '',
@@ -36,7 +37,7 @@ export default function CreateUserProfile({ auth }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-  // Create FormData object to send form data and file
+    // Create FormData object to send form data and file
     const data = new FormData();
     data.append('first_name', formData.first_name);
     data.append('last_name', formData.last_name);
@@ -68,130 +69,88 @@ export default function CreateUserProfile({ auth }) {
   };
 
   return (
-    <UserDashboardLayout
-      user={auth.user}>
+    <UserDashboardLayout user={auth.user}>
       <Head title="Create User Profile" />
       <div className="flex">
         <Sidebar />
-        <div className="flex-1 flex justify-center items-center min-h-screen bg-gray-50">
-          <form
-            onSubmit={handleSubmit}
-            className="max-w-md w-full bg-gray-200 shadow-md rounded-md p-6 space-y-4"
-          >
-            <h3 className="text-xl font-semibold text-center text-[#254336]">New User Profile</h3>
+        {/* Main Content Area */}
+        <div className="flex-1 min-h-screen bg-gradient-to-b from-gray-100 to-gray-300 p-6 relative">
 
-            <div>
-              <label className="block text-[#254336] font-semibold mb-2">First Name:</label>
-              <input
-                type="text"
-                name="first_name"
-                value={formData.first_name}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-2 border border-[#41B06E] rounded-md focus:outline-none focus:border-indigo-500"
-              />
-            </div>
-
-            <div>
-              <label className="block text-[#254336] font-semibold mb-2">Last Name:</label>
-              <input
-                type="text"
-                name="last_name"
-                value={formData.last_name}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-2 border border-[#41B06E] rounded-md focus:outline-none focus:border-indigo-500"
-              />
-            </div>
-
-            <div>
-              <label className="block text-[#254336] font-semibold mb-2">Email:</label>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-2 border border-[#41B06E] rounded-md focus:outline-none focus:border-indigo-500"
-              />
-            </div>
-
-            <div>
-              <label className="block text-[#254336] font-semibold mb-2">Address:</label>
-              <input
-                type="text"
-                name="address"
-                value={formData.address}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-2 border border-[#41B06E] rounded-md focus:outline-none focus:border-indigo-500"
-              />
-            </div>
-
-            <div>
-              <label className="block text-[#254336] font-semibold mb-2">Phone Number:</label>
-              <input
-                type="text"
-                name="contact_phone"
-                value={formData.contact_phone}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-2 border border-[#41B06E] rounded-md focus:outline-none focus:border-indigo-500"
-              />
-            </div>
-
-            <div>
-              <label className="block text-[#254336] font-semibold mb-2">Social Media:</label>
-              <input
-                type="url"
-                name="social_media"
-                value={formData.social_media}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-2 border border-[#41B06E] rounded-md focus:outline-none focus:border-indigo-500"
-              />
-            </div>
-
-            <div>
-              <label className="block text-[#254336] font-semibold mb-2">Profile Picture:</label>
-              <input
-                type="file"
-                name="profile_picture"
-                onChange={handleFileChange}
-                required
-                className="w-full"
-              />
-            </div>
-
-            <div>
-              <label className="block text-[#254336] font-semibold mb-2">Resume:</label>
-              <input
-                type="file"
-                name="resume"
-                onChange={handleFileChange2}
-                required
-                className="w-full"
-              />
-            </div>
-
-            <div>
-              <label className="block text-[#254336] font-semibold mb-2">Description:</label>
-              <textarea
-                name="description"
-                value={formData.description}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-2 border border-[#41B06E] rounded-md focus:outline-none focus:border-indigo-500"
-              />
-            </div>
-
-            <button
-              type="submit"
-              className="w-full bg-[#1A5319] text-white font-semibold py-2 px-4 rounded-md hover:bg-[#254336] focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          {/* Back Button */}
+          <div className="absolute top-6 left-4">
+            <a
+              href="/userProfile"
+              className="rounded-lg px-4 py-2 bg-blue-500 text-blue-100 hover:bg-blue-600 duration-300 flex items-center shadow-md"
             >
-              Submit
-            </button>
-          </form>
+              <ArrowLeft size={20} className="mr-2" /> Back
+            </a>
+          </div>
+
+          {/* Centered Form */}
+          <div className="flex justify-center items-center  ">
+            <form
+              onSubmit={handleSubmit}
+              className="max-w-2xl w-full bg-white shadow-lg rounded-2xl p-8 space-y-6 border border-gray-200 "
+            >
+              <h3 className="text-2xl font-bold text-center text-[#254336]">New User Profile</h3>
+
+              {/* Form Fields */}
+              {[{ label: 'First Name', name: 'first_name', type: 'text' },
+              { label: 'Last Name', name: 'last_name', type: 'text' },
+              { label: 'Email', name: 'email', type: 'email' },
+              { label: 'Address', name: 'address', type: 'text' },
+              { label: 'Phone Number', name: 'contact_phone', type: 'text' },
+              { label: 'Social Media', name: 'social_media', type: 'url' }].map((field, index) => (
+                <div key={index}>
+                  <label className="block text-[#254336] font-medium mb-2">{field.label}:</label>
+                  <input
+                    type={field.type}
+                    name={field.name}
+                    value={formData[field.name]}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-2 border border-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 bg-gray-50"
+                  />
+                </div>
+              ))}
+
+              {/* File Inputs */}
+              {[{ label: 'Profile Picture', name: 'profile_picture', handler: handleFileChange },
+              { label: 'Resume', name: 'resume', handler: handleFileChange2 }].map((fileField, index) => (
+                <div key={index}>
+                  <label className="block text-[#254336] font-medium mb-2">{fileField.label}:</label>
+                  <input
+                    type="file"
+                    name={fileField.name}
+                    onChange={fileField.handler}
+                    required
+                    className="w-full border border-gray-500 rounded-lg p-2 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
+                  />
+                </div>
+              ))}
+
+              {/* Description Field */}
+              <div>
+                <label className="block text-[#254336] font-medium mb-2">Description:</label>
+                <textarea
+                  name="description"
+                  value={formData.description}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-2 border border-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 bg-gray-50"
+                />
+              </div>
+
+              {/* Submit Button */}
+              <button
+                type="submit"
+                className="rounded-lg px-2 py-2 bg-blue-600 text-blue-100 hover:bg-blue-700 duration-300 text-lg font-semibold w-full"
+              >
+                Submit
+              </button>
+            </form>
+          </div>
+
         </div>
       </div>
     </UserDashboardLayout>
