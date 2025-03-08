@@ -74,14 +74,41 @@ class PromotionController extends Controller
         return Response::json($promotions);
     }
 
-    public function destroy($id)
-    {
-        $promotion = Promotion::findOrFail($id);
-        $promotion->status = 9; // Set the status to 9
-        $promotion->save();     // Save the updated status
 
-        return response()->json(['message' => 'Promotion status updated successfully!']);
+    
+    public function edit($id)
+{
+    $promotion = Promotion::findOrFail($id);
+    return Inertia::render('Promotion/EditPromotion', ['promotion' => $promotion]);
+}
+
+public function update(Request $request, $id)
+{
+    $promotion = Promotion::findOrFail($id);
+
+    // Handle Image Update
+    if ($request->hasFile('ads_image')) {
+        $ads_image = $request->file('ads_image');
+        $ads_image_name = time() . '_' . $ads_image->getClientOriginalName();
+        $ads_image->move(public_path('files'), $ads_image_name);
+        $promotion->ads_image = $ads_image_name;
     }
+
+    $promotion->description = $request->description;
+    $promotion->text = $request->text;
+    $promotion->save();
+
+    return response()->json(['message' => 'Promotion updated successfully!']);
+}
+
+public function destroy($id)
+{
+    $promotion = Promotion::findOrFail($id);
+    $promotion->status = 9; // Soft delete by updating status
+    $promotion->save();
+
+    return response()->json(['message' => 'Promotion removed successfully!']);
+}
 
 }
 

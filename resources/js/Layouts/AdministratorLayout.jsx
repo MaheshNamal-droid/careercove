@@ -13,7 +13,7 @@ export default function AdministratorLayout({ user, header, children }) {
             <nav className="top-0 w-full z-50 bg-gray-800">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between header_wrapper h-16">
-                        <div className="flex" style={{ flexGrow : '2'}}>
+                        <div className="flex" style={{ flexGrow: '2' }}>
                             <div className="shrink-0 flex items-center">
                                 <Link href="/">
                                     <object data="../../assets/images/cc_logo.svg" type="image/svg+xml" class="logo w-12"> </object>
@@ -25,24 +25,16 @@ export default function AdministratorLayout({ user, header, children }) {
                                 <NavLink href={route('dashboard')} active={route().current('dashboard')}>
                                     Home
                                 </NavLink>
-                                <NavLink href={route('dashboard')} active={route().current('dashboardd')}>
+                                <NavLink href={route('about')} active={route().current('dashboardd')}>
                                     About
                                 </NavLink>
-                                <NavLink href={route('dashboard')} active={route().current('dashboardd')}>
-                                    Job Listing
-                                </NavLink>
-                                <NavLink href={route('dashboard')} active={route().current('dashboardd')}>
-                                    Pages
-                                </NavLink>
-                                <NavLink href={route('dashboard')} active={route().current('dashboardd')}>
-                                    Blog
-                                </NavLink>
-                                <NavLink href={route('dashboard')} active={route().current('dashboardd')}>
+
+                                <NavLink href={route('contactus')} active={route().current('dashboardd')}>
                                     Contact
                                 </NavLink>
                             </div>
                         </div>
-                        <div className="flex" style={{ flexGrow : '2' , justifyContent : 'end'}}>
+                        <div className="flex" style={{ flexGrow: '2', justifyContent: 'end' }}>
                             <div className="hidden sm:flex sm:items-center sm:ms-6">
                                 <div className="ms-3 relative">
                                     <Dropdown>

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   return (
-    <div className="h-screen bg-gray-800 text-white w-64 p-4">
+    <div className="min-h-screen bg-gray-800 text-white w-64 p-4">
       <h2 className="text-2xl font-bold mb-6">Admin Panel</h2>
       <nav>
         <ul>
@@ -19,9 +19,7 @@ const Sidebar = () => {
           <li className="mb-4">
             <a href="/administrator/getPromotions" className="hover:text-gray-300">Promotions</a>
           </li>
-          <li>
-            <Link to="/settings" className="hover:text-gray-300">Settings</Link>
-          </li>
+          
         </ul>
       </nav>
     </div>

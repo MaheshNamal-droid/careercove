@@ -66,6 +66,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
     
+
+
 // promotion route
 Route::get('/createPromotion', function () {
 return Inertia::render('Promotion/createPromotion');
@@ -79,6 +81,13 @@ Route::middleware('auth')->group(function () {
     // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// Edit, Update, Delete Promotion
+Route::get('/editPromotion/{id}', [PromotionController::class, 'edit'])->middleware(['auth', 'verified']);
+Route::post('/updatePromotion/{id}', [PromotionController::class, 'update'])->middleware(['auth', 'verified']);
+Route::post('/deletePromotion/{id}', [PromotionController::class, 'destroy'])->middleware(['auth', 'verified']);
+
+
+
 // review route
 Route::get('/createReview', function () {
     return Inertia::render('Review/createReview');
@@ -89,15 +98,21 @@ Route::get('/createReview', function () {
         // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     });
 
-    // user_profile route
-Route::get('/createUserProfile', function () {
-    return Inertia::render('UserProfile/createUserProfile');
-    })->middleware(['auth', 'verified'])->name('createUserProfile');
+    
+    // user profile
     Route::middleware('auth')->group(function () {
+        Route::get('/userProfile', [UserProfileController::class, 'getUserProfile'])->name('userProfile');
+        Route::get('/createUserProfile', function () {
+            return Inertia::render('UserProfile/createUserProfile');
+        })->name('createUserProfile');
         Route::post('/addUserProfile', [UserProfileController::class, 'create']);
-        // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-        // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    
+    // Edit & Update User Profile
+        Route::get('/editUserProfile/{id}', [UserProfileController::class, 'edit'])->name('editUserProfile');
+        Route::post('/updateUserProfile/{id}', [UserProfileController::class, 'update'])->name('updateUserProfile');
     });
+    
+
 
 // View all job vacancies
 Route::get('/manageJobVacancies', [JobController::class, 'index'])->name('manageJobVacancies');

@@ -38,10 +38,15 @@ export default function Dashboard({ auth, candidates, jobsPosted, companies }) {
                             <h1 className="text-2xl text-center">
                                 The Easiest Way To Get Your Dream Job
                             </h1>
+
+                            <p className="mt-4 text-lg text-center text-white">
+                                Unlock your career potential with Career Cove, where opportunities meet talent, and your dream job is just a click away.
+                            </p>
+
                             <div className="flex gap-5 flex-row text-black">
                                 <input
                                     type="text"
-                                    className="bg-gray-100 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                                    className="bg-gray-100 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm px-4 py-2 text-left w-96"
                                     placeholder="Job title, company"
                                     value={searchTerm}
                                     onChange={handleSearchInput}
