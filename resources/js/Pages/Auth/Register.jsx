@@ -28,11 +28,8 @@ export default function Register() {
 
             <form onSubmit={submit}>
 
-                 {/* CareerCove Heading */}
-                 <h1 className="text-4xl font-bold text-[#347928] text-center mb-2">
-                    Career Cove
-                </h1>
-                <h2 className="text-xl font-semibold text-[#16423C] text-center mb-2">
+                
+                <h2 className="text-3xl font-semibold text-[#16423C] text-center mb-2">
                     Register
                 </h2>
 

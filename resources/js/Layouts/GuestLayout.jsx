@@ -3,16 +3,31 @@ import { Link } from '@inertiajs/react';
 
 export default function Guest({ children }) {
     return (
-        <div className="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-            <div>
-                <Link href="/">
-                    <ApplicationLogo className="w-20 h-20 fill-current text-gray-500" />
-                </Link>
-            </div>
+        <div className="min-h-screen flex flex-row sm:justify-center items-center pt-6 sm:pt-0 bg-lime-200">
+           
+            <div className="w-full sm:max-w-md mt-6 px-6 py-4 bg-green-200 flex flex-col justify-center items-center shadow-lg overflow-hidden sm:rounded-lg h-[480px]"> 
+                <div className="text-center">
+                    {/* CareerCove Heading */}
+                    <h1 className="text-5xl font-bold text-[#347928] text-center mb-2">
+                        Career Cove
+                    </h1>
+                    {/* Welcome and Login Message */}
+                    <h2 className="text-xl font-bold text-[#1A5319] text-center mb-2">
+                        Welcome Back..!
+                    </h2>
+                    <div className="flex justify-center items-center">
+                        <Link href="/">
+                            <ApplicationLogo className="fill-current text-gray-500 mx-auto" />
+                        </Link>
+                    </div>
+                </div>
+           </div>
 
-            <div className="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
-                {children}
+           <div className="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-lg overflow-hidden sm:rounded-lg h-[480px]">
+               {children}
+               
             </div>
         </div>
+
     );
 }

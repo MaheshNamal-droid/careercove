@@ -36,16 +36,56 @@ class AppliedJobsController extends Controller
       return view('AppliedJobs.show', compact('job_vacancy'));
    }
    
-   public function getApplications(){
+  //  public function getApplications(){
      
-    //  $applications = applications::where('status', 1)->paginate(10);
-        $applications = applications::join('job_vacancy', 'application.job_id', '=', 'job_vacancy.id')
-        ->join('users', 'application.user_id', '=', 'users.id')
-        ->paginate($perPage = 10, $columns = ['application.*','job_vacancy.title', 'users.name']);
+  //   $user = auth()->id();
+  //   //  $applications = applications::where('status', 1)->paginate(10);
+  //       //$applications = applications::join('job_vacancy', 'application.job_id', '=', 'job_vacancy.id')
+  //       $applications = applications::where('application.user_id', $user)
+  //       ->where('status', '!=', 9) // Exclude deleted records
+  //       ->join('job_vacancy', 'application.job_id', '=', 'job_vacancy.id') 
+  //       ->select('application.*', 'job_vacancy.title as job_title') 
+  //       ->paginate(10); // Paginate the results
 
-     return Inertia::render('userDashboard/myApplications', ['posts' => $applications]);
 
-   }
+         
+
+     
+  //       // ->paginate($perPage = 10, $columns = ['application.*','job_vacancy.title', 'users.name']);
+
+  //    return Inertia::render('userDashboard/myApplications', ['posts' => $applications]);
+
+  //  }
+
+//   public function getApplications(){
+//    $user = auth()->id();
+
+//     // Fetch applications along with the related job_vacancy title using a join
+//     $applications = applications::where('application.user_id', $user) // Specify table for user_id
+//         ->where('application.status', '!=', 9) // Exclude deleted records, specify table for status
+//         ->join('job_vacancy', 'application.job_id', '=', 'job_vacancy.id') // Corrected table reference 'applications'
+//         ->select('application.*', 'job_vacancy.title as job_title') // Select all columns from applications and the job title from job_vacancy
+//         ->paginate(10); // Paginate the results
+
+//     // Return data to the Inertia view with posts (applications)
+//     return Inertia::render('userDashboard/myApplications', ['posts' => $applications]);
+// }
+
+
+public function getApplications(){
+     
+  $user = auth()->id();
+  //  $applications = applications::where('status', 1)->paginate(10);
+      $applications = applications::where('application.user_id', $user)
+      ->where('application.status', '!=', 9)
+      ->join('users', 'application.user_id', '=', 'users.id')
+      ->join('job_vacancy', 'application.job_id', '=', 'job_vacancy.id') 
+      
+      ->paginate($perPage = 10, $columns = ['application.*','job_vacancy.title', 'users.name']);
+
+   return Inertia::render('userDashboard/myApplications', ['posts' => $applications]);
+
+ }
 
 }
 ?>

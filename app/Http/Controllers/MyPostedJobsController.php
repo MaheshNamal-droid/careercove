@@ -80,7 +80,7 @@ class MyPostedJobsController extends Controller
         $userId = auth()->id();
         $jobVacancies = job_vacancy::where('user_id', $userId)
             ->where('status', '!=', 9) // Exclude deleted records
-            ->paginate(5); // Paginate the results
+            ->paginate(10); // Paginate the results
 
         //$jobs = job_vacancy::where('status', 1)->paginate(5);
         return Inertia::render('userDashboard/myPostedJobs', ['posts' => $jobVacancies]);

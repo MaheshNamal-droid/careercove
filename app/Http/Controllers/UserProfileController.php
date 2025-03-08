@@ -75,6 +75,7 @@ public function initiateScroll(Request $request)
 // view user profile
 public function getUserProfile(Request $request)
 {
+  
     $user_profile = user_profile::find($request->id);
    // return Response::json($user_profile);
     // return view('viewUserProfile', compact('user_profile'));

@@ -16,7 +16,7 @@ export default function UserDashboardLayout({ user, header, children }) {
                         <div className="flex" style={{ flexGrow : '2'}}>
                             <div className="shrink-0 flex items-center">
                                 <Link href="/">
-                                    <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800" />
+                                    <object data="../../assets/images/cc_logo.svg" type="image/svg+xml" class="logo w-12"> </object>
                                 </Link>
                             </div>
                         </div>
@@ -25,19 +25,10 @@ export default function UserDashboardLayout({ user, header, children }) {
                                 <NavLink href={route('dashboard')} active={route().current('dashboard')}>
                                     Home
                                 </NavLink>
-                                <NavLink href={route('dashboard')} active={route().current('dashboardd')}>
+                                <NavLink href={route('about')} active={route().current('about')}>
                                     About
                                 </NavLink>
-                                <NavLink href={route('dashboard')} active={route().current('dashboardd')}>
-                                    Job Listing
-                                </NavLink>
-                                <NavLink href={route('dashboard')} active={route().current('dashboardd')}>
-                                    Pages
-                                </NavLink>
-                                <NavLink href={route('dashboard')} active={route().current('dashboardd')}>
-                                    Blog
-                                </NavLink>
-                                <NavLink href={route('dashboard')} active={route().current('dashboardd')}>
+                                <NavLink href={route('contactus')} active={route().current('contactus')}>
                                     Contact
                                 </NavLink>
                             </div>
