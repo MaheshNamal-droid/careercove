@@ -35,16 +35,8 @@ export default function Login({ status, canResetPassword }) {
             <form
                 onSubmit={submit}
             >
-                {/* CareerCove Heading */}
-                <h1 className="text-4xl font-bold text-[#347928] text-center mb-2">
-                    Career Cove
-                </h1>
-
-                {/* Welcome and Login Message */}
-                <h2 className="text-xl font-bold text-[#1A5319] text-center mb-2">
-                    Welcome Back..!
-                </h2>
-                <h2 className="text-xl font-semibold text-[#16423C] text-center mb-2">
+            
+                <h2 className="text-3xl font-semibold text-[#16423C] text-center mb-2">
                     Login
                 </h2>
 
