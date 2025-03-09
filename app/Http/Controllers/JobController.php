@@ -52,6 +52,7 @@ class JobController extends Controller
             "user_id"=>auth()->id(),
             "title"=>$request->title,
             "job_category"=>$request->category,
+            "full_or_part_time"=>$request->full_or_part_time,
             "description"=>$request->description,
             "requirement"=>$request->requirement,
             "location"=>$request->location,
@@ -61,6 +62,7 @@ class JobController extends Controller
             "company_logo"=>$company_logo_name,
             "contact_phone"=>$request->contact_phone,   
             "contact_email"=>$request->contact_email,   
+            "city"=>$request->city, 
             "address"=>$request->address 
         ]);
         try{

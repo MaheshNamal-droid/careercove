@@ -9,6 +9,7 @@ export default function EditJobVacancy({ jobVacancy,cat_data, auth}) {
     const { data, setData, put, processing, errors } = useForm({
         title: jobVacancy.title || "",
         job_category: jobVacancy.job_category || "",
+        full_or_part_time: jobVacancy.full_or_part_time || "",
         description: jobVacancy.description || "",
         requirement: jobVacancy.requirement || "",
         location: jobVacancy.location || "",
@@ -16,6 +17,7 @@ export default function EditJobVacancy({ jobVacancy,cat_data, auth}) {
         company_name: jobVacancy.company_name || "",
         contact_phone: jobVacancy.contact_phone || "",
         contact_email: jobVacancy.contact_email || "",
+        city: jobVacancy.city || "",
         address: jobVacancy.address || "",
     });
 
@@ -65,6 +67,43 @@ export default function EditJobVacancy({ jobVacancy,cat_data, auth}) {
                                             {cat_data.map((item) => (
                                                 <option value={item.id}>{item.title}</option>
                                             ))}
+                                        </select>
+                                    </label>
+                                    {/* <option value="Full Time">Full Time</option>
+                                <option value="Part Time">Part Time</option>
+                                <option value="Remote">Remote</option>
+                                <option value="Internship">Internship</option> */}
+                                    <label className="block">
+                                        Job Type:
+                                        <select
+                                            value={data.job_type}
+                                            onChange={(e) => setData("full_or_part_time", e.target.value)}
+                                            id="job_type"
+                                            name="full_or_part_time"
+                                            required
+                                            className="w-full px-4 py-2 border border-gray-500 rounded-md focus:outline-none focus:border-indigo-500"
+                                            >
+                                            <option >Select a job type</option>
+                                            {data.full_or_part_time === "Full Time" ? (
+                                                <option value="Full Time" selected>Full Time</option>
+                                            ) : (
+                                                <option value="Full Time">Full Time</option>
+                                            )}
+                                            {data.full_or_part_time === "Part Time" ? (
+                                                <option value="Part Time" selected>Part Time</option>
+                                            ) : (
+                                                <option value="Part Time">Part Time</option>
+                                            )}
+                                            {data.full_or_part_time === "Remote" ? (
+                                                <option value="Remote" selected>Remote</option>
+                                            ) : (
+                                                <option value="Remote">Remote</option>
+                                            )}
+                                            {data.full_or_part_time === "Internship" ? (
+                                                <option value="Internship" selected>Internship</option>
+                                            ) : (
+                                                <option value="Internship">Internship</option>
+                                            )}
                                         </select>
                                     </label>
                                     <label className="block">
@@ -130,6 +169,15 @@ export default function EditJobVacancy({ jobVacancy,cat_data, auth}) {
                                             type="email"
                                             value={data.contact_email}
                                             onChange={(e) => setData("contact_email", e.target.value)}
+                                            className="block w-full border rounded px-3 py-2"
+                                        />
+                                    </label>
+                                    <label className="block">
+                                        City:
+                                        <input
+                                            type="text"
+                                            value={data.city}
+                                            onChange={(e) => setData("city", e.target.value)}
                                             className="block w-full border rounded px-3 py-2"
                                         />
                                     </label>

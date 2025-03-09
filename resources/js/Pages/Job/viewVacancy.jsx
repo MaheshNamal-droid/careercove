@@ -92,7 +92,7 @@ export default function viewVacancy({ data, auth }) {
 
                                 <span class="job-type bg-teal-500 text-white p-1 text-xs mr-4">{data.full_or_part_time}</span>
                                 <span class="job-location text-xs">{data.company_name}</span>
-                                <span class="remote-job text-xs ml-4">Remote Job</span>
+                                <span class="remote-job text-xs ml-4">{data.full_or_part_time}</span>
                             </div>
                         </div>
                         <div class="job-description mb-4">

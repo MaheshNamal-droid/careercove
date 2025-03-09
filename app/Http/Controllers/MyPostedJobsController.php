@@ -110,10 +110,13 @@ class MyPostedJobsController extends Controller
 
     public function update(Request $request, $id)
     {
+        // print_r($request->all());
+        // die;
         $jobVacancy = job_vacancy::findOrFail($id); // Find the job by ID
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
             'job_category' => 'required|integer',
+            'full_or_part_time' => 'required|string',
             'description' => 'required|string',
             'requirement' => 'required|string',
             'location' => 'required|string|max:255',
@@ -121,6 +124,7 @@ class MyPostedJobsController extends Controller
             'company_name' => 'required|string|max:255',
             'contact_phone' => 'nullable|string|max:20',
             'contact_email' => 'nullable|email|max:255',
+            'city' => 'nullable|string|max:255',
             'address' => 'nullable|string|max:255',
         ]);
 

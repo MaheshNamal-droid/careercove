@@ -29,9 +29,9 @@ Route::get('/home', function () {
     return Inertia::render('Dashboard');
 })->name('home');
 // admin routes
-Route::get('/administrator', function () {
-    return Inertia::render('Admin/Home');
-})->middleware(['auth', 'verified'])->name('administrator');
+// Route::get('/administrator', function () {
+//     return Inertia::render('Admin/Home');
+// })->middleware(['auth', 'verified', 'isAdminn'])->name('administrator');
 Route::get('/administrator/users', function () {
     return Inertia::render('Admin/Users');
 })->middleware(['auth', 'verified'])->name('administrator');
@@ -169,9 +169,12 @@ Route::get('/contactus', function () {
     return Inertia::render('ContactUs/contactus');
     })->middleware(['auth', 'verified'])->name('contactus');
 //administrator
-Route::get('/administrator', function () {
-    return Inertia::render('Admininistrator/Home');
-})->middleware(['auth', 'verified'])->name('administrator');
+// Route::get('/administrator', function () {
+//     return Inertia::render('Admininistrator/Home');
+// })->middleware(['auth', 'verified', 'IsAdmin'])->name('administrator');
+Route::middleware(['auth', 'verified', 'IsAdmin'])->group(function () {
+    Route::get('/administrator', [AdministratorUser::class, 'home'])->name('administrator');
+});
 Route::get('/administrator/users', function () {
     return Inertia::render('Admininistrator/Users');
 })->middleware(['auth', 'verified'])->name('administrator');
