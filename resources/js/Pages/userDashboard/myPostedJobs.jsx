@@ -61,6 +61,11 @@ export default function MyPostedJobs(props) {
                                                     className="rounded-lg px-4 py-2 bg-red-600 text-blue-100 hover:bg-red-700 duration-300">
                                                     Remove
                                                 </Link> 
+                                                <Link
+                                                    href={`/userDashboard/jobVacancy/${id}/applications`}
+                                                    className="rounded-lg px-4 py-2 bg-violet-600 text-blue-100 hover:bg-violet-900 duration-300">
+                                                    View Applications
+                                                </Link>
                                             </td>
                                         </tr>
                                     ))}

@@ -12,6 +12,7 @@ use App\Http\Controllers\DashboardController;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\AppliedJobsController;
 use App\Http\Controllers\UsereDashboardController;
+use App\Http\Controllers\JobApplicationController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -282,6 +283,13 @@ Route::middleware('auth')->group(function () {
 
 // Route to delete a specific job vacancy by its ID
 Route::get('/userDashboard/jobVacancy/{id}/delete', [MyPostedJobsController::class, 'delete'])->name('jobVacancy.delete');
+
+// Route to display all job applications for a specific job vacancy
+Route::get('/userDashboard/jobVacancy/{id}/applications', [JobApplicationController::class, 'index'])
+    ->middleware(['auth']);
+
+// Route to update the status of a job application (approve or pending)
+Route::post('/updateApplicationStatus', [JobApplicationController::class, 'updateStatus'])->name('applications.updateStatus');
 
 require __DIR__.'/auth.php';
 
