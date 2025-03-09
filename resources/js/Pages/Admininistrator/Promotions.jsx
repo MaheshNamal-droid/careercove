@@ -5,6 +5,7 @@ import { Head, usePage } from '@inertiajs/react';
 import Sidebar from '../../Components/Administrator/Sidebar';
 import Pagination from '../../Components/Pagination';
 import { Eye, X } from 'lucide-react';
+import axios from 'axios';
 
 export default function Promotions(props) {
     const { posts } = usePage().props;
@@ -20,6 +21,20 @@ export default function Promotions(props) {
     // Function to close the modal
     const closeModal = () => {
         setSelectedImage(null);
+    };
+
+    // Function to remove a promotion
+    const handleRemoveClick = async (id) => {
+        if (confirm('Are you sure you want to remove this promotion?')) {
+            try {
+                const response = await axios.post(`/deletePromotion/${id}`);
+                alert(response.data.message);
+                window.location.reload(); // Reload the page to update the table
+            } catch (error) {
+                console.error('Error removing promotion:', error);
+                alert('Failed to remove promotion.');
+            }
+        }
     };
 
     return (

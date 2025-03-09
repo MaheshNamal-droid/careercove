@@ -3,9 +3,9 @@ import { Link } from '@inertiajs/react';
 
 export default function Guest({ children }) {
     return (
-        <div className="min-h-screen flex flex-row sm:justify-center items-center pt-6 sm:pt-0 bg-lime-200">
+        <div className="min-h-screen flex flex-row sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
            
-            <div className="w-full sm:max-w-md mt-6 px-6 py-4 bg-green-200 flex flex-col justify-center items-center shadow-lg overflow-hidden sm:rounded-lg h-[480px]"> 
+            <div className="w-full sm:max-w-md mt-6 px-6 py-4 bg-white flex flex-col justify-center items-center shadow-xl overflow-hidden h-[480px] "> 
                 <div className="text-center">
                     {/* CareerCove Heading */}
                     <h1 className="text-5xl font-bold text-[#347928] text-center mb-2">
@@ -23,7 +23,7 @@ export default function Guest({ children }) {
                 </div>
            </div>
 
-           <div className="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-lg overflow-hidden sm:rounded-lg h-[480px]">
+           <div className="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-xl overflow-hidden h-[480px] ">
                {children}
                
             </div>
