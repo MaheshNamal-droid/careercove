@@ -18,11 +18,9 @@ return Application::configure(basePath: dirname(__DIR__))
             \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
         ]);
         $middleware->alias([
-            'EnsureProfileIsCreated' => EnsureProfileIsCreated::class
-        ]);
-        $middleware->alias([
+            'EnsureProfileIsCreated' => EnsureProfileIsCreated::class,
             'IsAdmin' => IsAdmin::class
-        ]);      
+        ]);
         //
     })
     ->withExceptions(function (Exceptions $exceptions) {
