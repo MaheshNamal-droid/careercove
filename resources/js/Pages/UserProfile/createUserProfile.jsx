@@ -13,7 +13,7 @@ export default function CreateUserProfile({ auth }) {
     address: '',
     contact_phone: '',
     social_media: '',
-    profile_picture: null,
+    profile_picture: null,  // File inputs (default null)
     resume: null,
     description: '',
   });

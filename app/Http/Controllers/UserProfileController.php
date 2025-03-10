@@ -52,7 +52,7 @@ class UserProfileController extends Controller
     $responsedata = user_profile::create($data);
     return Response::json($responsedata);
 } catch (\Illuminate\Database\QueryException $exception) {
-    // You can check get the details of the error using `errorInfo`:
+    // can check get the details of the error using `errorInfo`:
     $errorInfo = $exception->errorInfo;
     //print_r($errorInfo);
     return response()->json('Unable to save data, please contact administrator !', 404); 

@@ -291,5 +291,8 @@ Route::get('/userDashboard/jobVacancy/{id}/applications', [JobApplicationControl
 // Route to update the status of a job application (approve or pending)
 Route::post('/updateApplicationStatus', [JobApplicationController::class, 'updateStatus'])->name('applications.updateStatus');
 
+// Route to add a note to a job application
+Route::post('application/addNote', [JobApplicationController::class, 'addNote'])->name('application.addNote');
+
 require __DIR__.'/auth.php';
 
