@@ -13,6 +13,7 @@ use Illuminate\Foundation\Application;
 use App\Http\Controllers\AppliedJobsController;
 use App\Http\Controllers\UsereDashboardController;
 use App\Http\Controllers\JobApplicationController;
+use App\Http\Controllers\ContactUsController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -290,6 +291,7 @@ Route::get('/userDashboard/jobVacancy/{id}/applications', [JobApplicationControl
 
 // Route to update the status of a job application (approve or pending)
 Route::post('/updateApplicationStatus', [JobApplicationController::class, 'updateStatus'])->name('applications.updateStatus');
-
+// Send contatct us email
+Route::post('/sendContactmessage', [ContactUsController::class, 'sendMail'])->name('contact-us.store');
 require __DIR__.'/auth.php';
 

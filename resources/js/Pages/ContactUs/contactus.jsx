@@ -6,6 +6,45 @@ import Footer from '../../Components/Footer';
 
 
 export default function contactus({ auth }) {
+    const [formdata, setFormData] = React.useState({
+        name: '',
+        email: '',
+        phone: '',
+        message: '',
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formdata, [name]: value });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const data = new FormData();
+        data.append('name', formdata.name);
+        data.append('email', formdata.email);
+        data.append('phone', formdata.subject);
+        data.append('message', formdata.message);
+        try {
+            const response = await fetch('/sendContactmessage', {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': document.head.querySelector('meta[name="csrf-token"]')?.getAttribute('content'),
+                },
+                body: data,
+            });
+
+            if (response.ok) {
+                alert('Message sent successfully!');
+            } else {
+                alert('Failed to send message.');
+            }
+        } catch (error) {
+            console.error('Error sending message:', error);
+            alert('Failed to send message.');
+            }
+        }
+
     return(
             <AuthenticatedLayout user={auth.user}>
 
@@ -67,11 +106,28 @@ export default function contactus({ auth }) {
                 <section className="bg-gray-900 shadow-md p-8 mb-6">
                     <h2 className="text-center text-white text-2xl font-bold mb-4">Send Us a Message</h2>
 
-                    <form className="max-w-md mx-auto space-y-6">
-                        <input type="text" placeholder="Name" className="w-full px-4 py-2  rounded-md" />
-                        <input type="email" placeholder="Email" className="w-full px-4 py-2  rounded-md" />
-                        <input type="text" placeholder="Phone Number" className="w-full px-4 py-2  rounded-md" />
-                        <textarea placeholder="Message" rows="5" className="w-full px-4 py-2  rounded-md"></textarea>
+                    <form onSubmit={handleSubmit} className="max-w-md mx-auto space-y-6">
+                        <input
+                         type="text"
+                         name='name'
+                         onChange={handleChange}
+                         required
+                         placeholder="Name" className="w-full px-4 py-2  rounded-md" />
+                        <input 
+                        type="email"
+                        name='email'
+                        onChange={handleChange}
+                        required 
+                        placeholder="Email" className="w-full px-4 py-2  rounded-md" />
+                        <input 
+                        type="text"
+                        name='phone'
+                        onChange={handleChange}
+                        placeholder="Phone Number" className="w-full px-4 py-2  rounded-md" />
+                        <textarea
+                        name='message'
+                        onChange={handleChange} 
+                        placeholder="Message" rows="5" className="w-full px-4 py-2  rounded-md"></textarea>
                         <button type="submit" className="w-full bg-lime-500 text-white py-2 font-bold uppercase rounded-md hover:bg-lime-700">Send</button>
                     </form>
                 </section>

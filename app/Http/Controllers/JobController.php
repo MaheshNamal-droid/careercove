@@ -179,15 +179,6 @@ class JobController extends Controller
         return view('JobVacancy.index', ['JobVacancy' => $results, 'query' => $query]); // Pass the results and the query to the view
     }
 
-
-
-
-
-
-    
-
-
-
 // Controller Method to Get Job Vacancies
 public function getJobVacancies(Request $request)
 {
