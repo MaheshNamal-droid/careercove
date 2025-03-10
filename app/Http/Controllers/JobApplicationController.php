@@ -48,4 +48,25 @@ class JobApplicationController extends Controller
         // Redirect back with a success message
         return back()->with('success', 'Application status updated successfully.');
     }
+
+    // Method to add a note to an application
+    public function addNote(Request $request)
+{
+    // Validate the input data
+    $request->validate([
+        'id' => 'required|exists:application,id',
+        'note' => 'required|string',
+    ]);
+
+    // Find the application
+    $application = applications::find($request->id);
+
+    // Update the note field
+    $application->note = $request->note;
+    $application->save();
+
+    // Return a success response
+    return back()->with('success', 'Note added successfully');
+}
+
 }

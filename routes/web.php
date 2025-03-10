@@ -293,5 +293,9 @@ Route::get('/userDashboard/jobVacancy/{id}/applications', [JobApplicationControl
 Route::post('/updateApplicationStatus', [JobApplicationController::class, 'updateStatus'])->name('applications.updateStatus');
 // Send contatct us email
 Route::post('/sendContactmessage', [ContactUsController::class, 'sendMail'])->name('contact-us.store');
+
+// Route to add a note to a job application
+Route::post('application/addNote', [JobApplicationController::class, 'addNote'])->name('application.addNote');
+
 require __DIR__.'/auth.php';
 

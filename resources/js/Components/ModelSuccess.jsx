@@ -19,7 +19,7 @@ function ModelSuccess({onClose,responsemsg,responsestatus,userprofilestatus,logi
             <button onClick={onClose} className='place-self-end'><X size={30}/></button>
             <div className='bg-lime-200 rounded-xl px-20 py-10 flex flex-col gap-5 items-center'>
             { responsestatus ?
-               <><PartyPopper size={100} /><h1 className='text-2xl'>{responsemsg}</h1><h2 className='text-1xl'>You will recivied an email with further details</h2><h2 className='text-1xl'>Thank you!</h2><a href='/login' className='text-blue-600'><h1 className='text-1xl'>Check appplication status</h1></a><a href='/dashboard' className='text-blue-600'><h1 className='text-1xl'>Home</h1></a></>
+               <><PartyPopper size={100} /><h1 className='text-2xl'>{responsemsg}</h1><h2 className='text-1xl'>You will recivied an email with further details</h2><h2 className='text-1xl'>Thank you!</h2><a href='/userDashboard/getApplications' className='text-blue-600'><h1 className='text-1xl'>Check appplication status</h1></a><a href='/dashboard' className='text-blue-600'><h1 className='text-1xl'>Home</h1></a></>
             :
                 <> <ShieldAlert size={100} /><h1 className='text-2xl text-red-600'>{responsemsg}</h1><a href='/dashboard' className='text-blue-600'><h1 className='text-1xl'>Home</h1></a></>
             }
