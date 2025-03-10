@@ -89,7 +89,7 @@ const handleSubmit = async (e) => {
             <div className="dashboard_top_container">
                 <div className='flex inset-0 bg-black bg-opacity-50 justify-center items-center backdrop-brightness-75'>
                    
-                        <div className ="pt-24 w-xl">
+                        <div className ="pt-24 w-3/4 max-w-xl">
                         <form onSubmit={handleSubmit} className="p-12 bg-white shadow-lg rounded-md space-y-4">
                             <div>
                                 <h3 className="text-2xl font-bold text-center mb-6">New Vacancy</h3>
