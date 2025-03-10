@@ -32,7 +32,6 @@ export default function MyPostedJobs(props) {
                                     <tr class="">
                                         <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Company Name</th>
                                         <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Title</th>
-                                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Location</th>
                                         <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Closing Date</th>
                                         <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Actions</th>
                                         <th></th>
@@ -43,7 +42,6 @@ export default function MyPostedJobs(props) {
                                         <tr key={id} >
                                             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm hover:bg-lime-100">{company_name}</td>
                                             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm hover:bg-lime-100">{title}</td>
-                                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm hover:bg-lime-100">{location}</td>
                                             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm hover:bg-lime-100">{closing_date}</td>
                                             <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm space-x-2">
                                                 <Link
