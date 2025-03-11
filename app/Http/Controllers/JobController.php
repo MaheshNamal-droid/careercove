@@ -93,7 +93,7 @@ class JobController extends Controller
 // infinate scroll
     public function initiateScroll(Request $request)
     {
-        $vacancies = job_vacancy::ORDERBY('created_at', 'DESC')->paginate(10); // Paginate the results, 10 per page
+        $vacancies = job_vacancy::WHERE('status', '!=', 9)->ORDERBY('created_at', 'DESC')->paginate(10); // Paginate the results, 10 per page
         return Response::json($vacancies);
         if ($request->ajax()) {
            // return view('users.partials.users_list', compact('users'))->render();
